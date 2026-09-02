@@ -362,6 +362,225 @@
     .hero h1 { font-size: 26px; }
     .tab-btn { font-size: 13.5px; padding: 10px 6px; }
   }
+
+  /* ---------- Add to list button ---------- */
+  .card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 2px;
+  }
+
+  .add-list-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 13px;
+    border-radius: 9px;
+    border: 1.5px solid var(--accent2);
+    background: transparent;
+    color: var(--accent2);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+
+  .add-list-btn:hover { background: rgba(92,122,94,0.1); }
+
+  .add-list-btn.selected {
+    background: var(--accent2);
+    color: #fff;
+  }
+
+  /* ---------- Floating shopping list button ---------- */
+  .fab-cart {
+    position: fixed;
+    bottom: 22px;
+    right: 22px;
+    z-index: 60;
+    background: var(--ink);
+    color: #f8f1de;
+    border: none;
+    border-radius: 999px;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .fab-cart:hover { transform: translateY(-2px); }
+  .fab-cart.hidden { display: none; }
+
+  .fab-badge {
+    background: var(--accent);
+    color: #fff;
+    border-radius: 999px;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12.5px;
+    font-weight: 800;
+  }
+
+  /* ---------- Shopping list panel ---------- */
+  .panel-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(28,43,57,0.45);
+    z-index: 100;
+    display: none;
+  }
+  .panel-overlay.open { display: block; }
+
+  .panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: min(420px, 100%);
+    background: var(--bg);
+    box-shadow: -8px 0 30px rgba(0,0,0,0.2);
+    z-index: 101;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .panel.open { transform: translateX(0); }
+
+  .panel-header {
+    background: var(--ink);
+    color: #f8f1de;
+    padding: 18px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .panel-header h2 {
+    margin: 0;
+    font-size: 19px;
+  }
+
+  .panel-close {
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: #f8f1de;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    font-size: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .panel-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 18px 100px;
+  }
+
+  .panel-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+  }
+
+  .clear-all-btn {
+    background: none;
+    border: none;
+    color: var(--accent-dark);
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 4px 0;
+  }
+
+  .selected-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 18px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 8px 6px 13px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+
+  .chip-remove {
+    background: var(--border);
+    border: none;
+    border-radius: 999px;
+    width: 19px;
+    height: 19px;
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .shop-group {
+    margin-bottom: 16px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 13px 15px;
+  }
+
+  .shop-group-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 8px;
+    font-family: Georgia, "Noto Serif", serif;
+  }
+
+  .shop-line {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    padding: 3px 0;
+  }
+
+  .shop-line .amt { font-weight: 700; color: var(--ink); }
+  .shop-line .for-recipe { font-size: 12.5px; color: var(--muted); }
+
+  .panel-empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 60px 20px;
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
 </style>
 </head>
 <body>
@@ -405,6 +624,19 @@
 
 <footer id="t-footer">Recipes curated from justonecookbook.com — tap a card to see ingredients, then open the original for full instructions.</footer>
 
+<button class="fab-cart hidden" id="fab-cart" onclick="openPanel()">
+  🛒 <span id="t-fab-label">Shopping List</span> <span class="fab-badge" id="fab-badge">0</span>
+</button>
+
+<div class="panel-overlay" id="panel-overlay" onclick="closePanel()"></div>
+<div class="panel" id="panel">
+  <div class="panel-header">
+    <h2 id="t-panel-title">Shopping List</h2>
+    <button class="panel-close" onclick="closePanel()">✕</button>
+  </div>
+  <div class="panel-body" id="panel-body"></div>
+</div>
+
 <script>
 const RECIPE_DATA = {"quick": [{"url": "https://www.justonecookbook.com/tonpeiyaki/", "name_en": "Tonpeiyaki (Pork and Cabbage Omelette)", "name_cz": "Tonpeiyaki (omeleta s vepřovým masem a zelím)", "time": "20 min", "desc_en": "A soft Osaka-style omelette folded around a savory pork-and-cabbage filling, finished with okonomi sauce, mayo, and seaweed flakes.", "desc_cz": "Měkká omeleta v osackém stylu plněná vepřovým masem a zelím, dozdobená omáčkou okonomi, majonézou a mořskými řasami.", "ingredients": [{"en": "Sliced pork belly – ¼ lb (115 g)", "cz": "Plátky vepřového bůčku – 115 g", "opt": false}, {"en": "Green cabbage – ¼ head (~325 g)", "cz": "Zelí – ¼ hlávky (~325 g)", "opt": false}, {"en": "Soy sauce – 1 tsp", "cz": "Sójová omáčka – 1 lžička", "opt": false}, {"en": "Mirin – 1 tsp", "cz": "Mirin – 1 lžička", "opt": false}, {"en": "Black pepper – ⅛ tsp", "cz": "Černý pepř – špetka", "opt": false}, {"en": "Neutral oil – 2 Tbsp, divided", "cz": "Neutrální olej – 2 lžíce, rozděleno", "opt": false}, {"en": "Eggs – 2 large", "cz": "Vejce – 2 velká", "opt": false}, {"en": "Potato starch or cornstarch – 1 tsp", "cz": "Bramborový nebo kukuřičný škrob – 1 lžička", "opt": false}, {"en": "Water – 1 tsp", "cz": "Voda – 1 lžička", "opt": false}, {"en": "Okonomi (okonomiyaki) sauce – to taste", "cz": "Omáčka okonomi – dle chuti", "opt": false}, {"en": "Japanese Kewpie mayonnaise – to taste", "cz": "Japonská majonéza Kewpie – dle chuti", "opt": false}, {"en": "Aonori seaweed flakes – to taste", "cz": "Sušené řasy aonori – dle chuti", "opt": false}]}, {"url": "https://www.justonecookbook.com/chicken-teriyaki/", "name_en": "Chicken Teriyaki", "name_cz": "Kuřecí teriyaki", "time": "20 min", "desc_en": "Pan-seared chicken thighs glazed in a shiny four-ingredient homemade teriyaki sauce, ready in under 20 minutes.", "desc_cz": "Kuřecí stehna opečená na pánvi a poté zalitá lesklou domácí teriyaki omáčkou ze čtyř surovin, hotovo za necelých 20 minut.", "ingredients": [{"en": "Boneless chicken thighs (skin-on preferred) – ¾–1 lb", "cz": "Kuřecí stehna bez kosti (nejlépe s kůží) – 340–450 g", "opt": false}, {"en": "Salt – ⅛ tsp", "cz": "Sůl – špetka", "opt": false}, {"en": "Black pepper – ⅛ tsp", "cz": "Černý pepř – špetka", "opt": false}, {"en": "Neutral oil – 1 Tbsp", "cz": "Neutrální olej – 1 lžíce", "opt": false}, {"en": "Soy sauce – 2 Tbsp", "cz": "Sójová omáčka – 2 lžíce", "opt": false}, {"en": "Mirin – 2 Tbsp", "cz": "Mirin – 2 lžíce", "opt": false}, {"en": "Sake – 2 Tbsp", "cz": "Saké – 2 lžíce", "opt": false}, {"en": "Sugar – 1 Tbsp", "cz": "Cukr – 1 lžíce", "opt": false}]}, {"url": "https://www.justonecookbook.com/homemade-miso-soup/", "name_en": "Homemade Miso Soup", "name_cz": "Domácí polévka Miso", "time": "20 min", "desc_en": "Classic Japanese miso soup made with fresh dashi stock, silken tofu, wakame seaweed, and green onion.", "desc_cz": "Klasická japonská polévka miso z čerstvého vývaru dashi, hedvábného tofu, mořských řas wakame a jarní cibulky.", "ingredients": [{"en": "Water – 4 cups", "cz": "Voda – 1 l", "opt": false}, {"en": "Kombu (dried kelp) – 1 piece (~10 g)", "cz": "Kombu (sušené kelp) – 1 kus (~10 g)", "opt": false}, {"en": "Katsuobushi (dried bonito flakes) – 1 cup packed", "cz": "Katsuobushi (sušené vločky bonita) – 1 hrnek natěsno", "opt": false}, {"en": "Soft/silken tofu – 7 oz (200 g)", "cz": "Hedvábné tofu – 200 g", "opt": false}, {"en": "Miso paste – 4 Tbsp", "cz": "Miso pasta – 4 lžíce", "opt": false}, {"en": "Dried wakame seaweed – 1 Tbsp", "cz": "Sušené řasy wakame – 1 lžíce", "opt": false}, {"en": "Green onion/scallion – 1", "cz": "Jarní cibulka – 1 ks", "opt": false}]}, {"url": "https://www.justonecookbook.com/miso-salmon/", "name_en": "Miso Salmon", "name_cz": "Losos v miso marinádě", "time": "20 min (+ marinating)", "desc_en": "Skin-on salmon fillets marinated in a sweet-savory miso mixture, then broiled until caramelized.", "desc_cz": "Filety lososa s kůží marinované ve sladko-slané miso směsi a poté zapečené dozlatova.", "ingredients": [{"en": "Skin-on salmon fillets – 14 oz (400 g)", "cz": "Filety lososa s kůží – 400 g", "opt": false}, {"en": "Miso paste – 2 Tbsp", "cz": "Miso pasta – 2 lžíce", "opt": false}, {"en": "Sake – 1 Tbsp", "cz": "Saké – 1 lžíce", "opt": false}, {"en": "Mirin – 1 Tbsp", "cz": "Mirin – 1 lžíce", "opt": false}, {"en": "Soy sauce – 1 Tbsp", "cz": "Sójová omáčka – 1 lžíce", "opt": false}, {"en": "Toasted sesame oil – ¼ tsp", "cz": "Pražený sezamový olej – ¼ lžičky", "opt": false}, {"en": "Toasted white and black sesame seeds – ½ tsp, for garnish", "cz": "Pražený bílý a černý sezam – ½ lžičky, na ozdobu", "opt": true}, {"en": "Green onion/scallion, chopped, for garnish", "cz": "Jarní cibulka, nasekaná, na ozdobu", "opt": true}]}, {"url": "https://www.justonecookbook.com/gyudon/", "name_en": "Gyudon (Japanese Beef Rice Bowl)", "name_cz": "Gyūdon (miska rýže s hovězím masem)", "time": "20 min", "desc_en": "Thin-sliced beef and onion simmered in a sweet-savory dashi broth, served over steamed rice.", "desc_cz": "Tence nakrájené hovězí maso a cibule dušené ve sladko-slaném vývaru dashi, podávané na rýži.", "ingredients": [{"en": "Thinly sliced beef (ribeye or similar) – ½ lb (225 g)", "cz": "Tence nakrájené hovězí maso (roštěná) – 225 g", "opt": false}, {"en": "Onion – ½ (113 g)", "cz": "Cibule – ½ ks (113 g)", "opt": false}, {"en": "Green onion/scallion – 1", "cz": "Jarní cibulka – 1 ks", "opt": false}, {"en": "Cooked Japanese short-grain rice – 2 servings", "cz": "Vařená japonská rýže – 2 porce", "opt": false}, {"en": "Dashi (Japanese soup stock) – ½ cup", "cz": "Vývar dashi – 120 ml", "opt": false}, {"en": "Soy sauce – 3 Tbsp", "cz": "Sójová omáčka – 3 lžíce", "opt": false}, {"en": "Sake – 2 Tbsp", "cz": "Saké – 2 lžíce", "opt": false}, {"en": "Mirin – 2 Tbsp", "cz": "Mirin – 2 lžíce", "opt": false}, {"en": "Sugar – 1 Tbsp, to taste", "cz": "Cukr – 1 lžíce, dle chuti", "opt": false}, {"en": "Pickled red ginger, for garnish", "cz": "Nakládaný červený zázvor, na ozdobu", "opt": true}]}, {"url": "https://www.justonecookbook.com/teriyaki-salmon-recipe/", "name_en": "Teriyaki Salmon", "name_cz": "Losos teriyaki", "time": "15 min", "desc_en": "Pan-seared salmon fillets finished with a glossy homemade teriyaki glaze, ready in 15 minutes.", "desc_cz": "Filety lososa opečené na pánvi a dokončené lesklou domácí teriyaki omáčkou, hotovo za 15 minut.", "ingredients": [{"en": "Skin-on salmon fillets – ¾ lb (340 g)", "cz": "Filety lososa s kůží – 340 g", "opt": false}, {"en": "Unsalted butter – 1 Tbsp", "cz": "Máslo neslazené – 1 lžíce", "opt": false}, {"en": "All-purpose flour – 1 Tbsp", "cz": "Hladká mouka – 1 lžíce", "opt": false}, {"en": "Soy sauce – 2 Tbsp", "cz": "Sójová omáčka – 2 lžíce", "opt": false}, {"en": "Neutral oil – ½ Tbsp", "cz": "Neutrální olej – ½ lžíce", "opt": false}, {"en": "Sake – 2 Tbsp total (1 Tbsp for sauce, 1 Tbsp for steaming)", "cz": "Saké – 2 lžíce celkem (1 do omáčky, 1 na dušení)", "opt": false}, {"en": "Mirin – 1 Tbsp", "cz": "Mirin – 1 lžíce", "opt": false}, {"en": "Sugar – 1 Tbsp", "cz": "Cukr – 1 lžíce", "opt": false}, {"en": "Salt – ¼ tsp", "cz": "Sůl – ¼ lžičky", "opt": false}, {"en": "Black pepper – ⅛ tsp", "cz": "Černý pepř – špetka", "opt": false}]}, {"url": "https://www.justonecookbook.com/soy-glazed-eggplant-donburi/", "name_en": "Soy-Glazed Eggplant Donburi", "name_cz": "Rýže s baklažánem v sójové glazuře", "time": "20 min", "desc_en": "Golden pan-seared eggplant coated in a sweet-savory mirin and soy glaze, served over rice — a vegan rice bowl.", "desc_cz": "Baklažán osmažený dozlatova a glazovaný sladko-slanou omáčkou z mirinu a sójové omáčky, podávaný na rýži – veganská rýžová mísa.", "ingredients": [{"en": "Japanese or Chinese eggplant – 2 (7 oz/200 g)", "cz": "Japonský nebo čínský baklažán – 2 ks (200 g)", "opt": false}, {"en": "Salt – ½ tsp, for salting eggplant", "cz": "Sůl – ½ lžičky, na baklažán", "opt": false}, {"en": "Shiso leaves – 10 (or 1 green onion)", "cz": "Listy shiso – 10 ks (nebo 1 jarní cibulka)", "opt": false}, {"en": "Ginger, grated – 1 tsp", "cz": "Zázvor, nastrouhaný – 1 lžička", "opt": false}, {"en": "Potato starch or cornstarch – 2 Tbsp", "cz": "Bramborový nebo kukuřičný škrob – 2 lžíce", "opt": false}, {"en": "Neutral oil – 4 Tbsp, divided", "cz": "Neutrální olej – 4 lžíce, rozděleno", "opt": false}, {"en": "Mirin – 4 Tbsp", "cz": "Mirin – 4 lžíce", "opt": false}, {"en": "Soy sauce – 2 Tbsp", "cz": "Sójová omáčka – 2 lžíce", "opt": false}, {"en": "Toasted white sesame seeds – ½ tsp, for garnish", "cz": "Pražený bílý sezam – ½ lžičky, na ozdobu", "opt": true}, {"en": "Cooked Japanese short-grain rice – 2 servings", "cz": "Vařená japonská rýže – 2 porce", "opt": false}]}, {"url": "https://www.justonecookbook.com/soba-salad/", "name_en": "Soba Noodle Salad", "name_cz": "Salát z pohankových nudlí soba", "time": "15 min", "desc_en": "Chilled buckwheat noodles tossed in a honey-soy-sesame dressing with scallions and cilantro.", "desc_cz": "Studené pohankové nudle promíchané s medovo-sójovo-sezamovým dresinkem, jarní cibulkou a koriandrem.", "ingredients": [{"en": "Dried soba noodles – 7 oz (200 g)", "cz": "Sušené nudle soba – 200 g", "opt": false}, {"en": "Green onions/scallions – 2", "cz": "Jarní cibulka – 2 ks", "opt": false}, {"en": "Cilantro (coriander) – 1 handful (20 g)", "cz": "Koriandr – 1 hrst (20 g)", "opt": false}, {"en": "Toasted white sesame seeds – 1 Tbsp", "cz": "Pražený bílý sezam – 1 lžíce", "opt": false}, {"en": "Neutral oil – 1 Tbsp", "cz": "Neutrální olej – 1 lžíce", "opt": false}, {"en": "Toasted sesame oil – 3 Tbsp", "cz": "Pražený sezamový olej – 3 lžíce", "opt": false}, {"en": "Crushed red pepper flakes – ½ tsp", "cz": "Drcené chilli vločky – ½ lžičky", "opt": true}, {"en": "Honey – 3 Tbsp", "cz": "Med – 3 lžíce", "opt": false}, {"en": "Soy sauce – 3 Tbsp", "cz": "Sójová omáčka – 3 lžíce", "opt": false}]}, {"url": "https://www.justonecookbook.com/miso-butter-pasta-with-tuna-cabbage/", "name_en": "Miso Butter Pasta with Tuna and Cabbage", "name_cz": "Těstoviny s miso máslem, tuňákem a zelím", "time": "15 min", "desc_en": "Al dente spaghetti tossed with cabbage, canned tuna, and a savory miso-butter sauce — a fast pantry-staple meal.", "desc_cz": "Těstoviny al dente promíchané se zelím, tuňákem z konzervy a slanou omáčkou z másla a miso pasty – rychlé jídlo ze spíže.", "ingredients": [{"en": "Salt – 1 Tbsp, for cooking pasta", "cz": "Sůl – 1 lžíce, na vaření těstovin", "opt": false}, {"en": "Spaghetti – 7 oz (200 g)", "cz": "Špagety – 200 g", "opt": false}, {"en": "Garlic – 2 cloves", "cz": "Česnek – 2 stroužky", "opt": false}, {"en": "Green cabbage – 3 leaves (5 oz/142 g)", "cz": "Zelí – 3 listy (142 g)", "opt": false}, {"en": "Canned tuna – ½ of a 5 oz can (preferably in olive oil)", "cz": "Tuňák v konzervě – polovina 140g konzervy (nejlépe v olivovém oleji)", "opt": false}, {"en": "Extra virgin olive oil – 1 Tbsp", "cz": "Olivový olej extra panenský – 1 lžíce", "opt": false}, {"en": "Black pepper, freshly ground", "cz": "Černý pepř, čerstvě mletý", "opt": false}, {"en": "Unsalted butter – 1 Tbsp", "cz": "Máslo neslazené – 1 lžíce", "opt": false}, {"en": "Miso – 1 Tbsp", "cz": "Miso pasta – 1 lžíce", "opt": false}, {"en": "Reserved pasta water – ¼ cup (60 ml)", "cz": "Odměřená voda z vaření těstovin – 60 ml", "opt": false}, {"en": "Soy sauce – 2 tsp", "cz": "Sójová omáčka – 2 lžičky", "opt": false}, {"en": "Mirin – 2 tsp", "cz": "Mirin – 2 lžičky", "opt": false}]}, {"url": "https://www.justonecookbook.com/kitsune-udon/", "name_en": "Kitsune Udon", "name_cz": "Udon Kitsune", "time": "20 min", "desc_en": "Udon noodles in warm dashi broth topped with sweet-simmered fried tofu pouches and fish cake.", "desc_cz": "Nudle udon v teplém vývaru dashi, ozdobené sladce dušeným smaženým tofu a rybím koláčem.", "ingredients": [{"en": "Katsuobushi (dried bonito flakes) – 1½ cups packed (skip for vegetarian)", "cz": "Katsuobushi (sušené vločky bonita) – 1½ hrnku natěsno (vynechte pro veganskou verzi)", "opt": true}, {"en": "Kombu (dried kelp) – 1 piece", "cz": "Kombu (sušené kelp) – 1 kus", "opt": false}, {"en": "Green onion/scallion – 1", "cz": "Jarní cibulka – 1 ks", "opt": false}, {"en": "Udon noodles – 2 servings", "cz": "Nudle udon – 2 porce", "opt": false}, {"en": "Inari age (seasoned fried tofu pouches) – 4", "cz": "Inari age (ochucené smažené tofu sáčky) – 4 ks", "opt": false}, {"en": "Dashi (Japanese soup stock) – 2½ cups", "cz": "Vývar dashi – 600 ml", "opt": false}, {"en": "Light-colored (usukuchi) soy sauce – 1 Tbsp", "cz": "Světlá sójová omáčka – 1 lžíce", "opt": false}, {"en": "Mirin – 1 Tbsp", "cz": "Mirin – 1 lžíce", "opt": false}, {"en": "Water – 2½ cups", "cz": "Voda – 600 ml", "opt": false}, {"en": "Sugar – 1 tsp", "cz": "Cukr – 1 lžička", "opt": false}, {"en": "Salt – ½ tsp", "cz": "Sůl – ½ lžičky", "opt": false}, {"en": "Narutomaki (fish cake) – 4 slices, for garnish", "cz": "Narutomaki (rybí koláč) – 4 plátky, na ozdobu", "opt": true}, {"en": "Shichimi togarashi (Japanese seven spice), for a spicy kick", "cz": "Shichimi togarashi (japonské sedmikoření), na dochucení", "opt": true}]}, {"url": "https://www.justonecookbook.com/zaru-soba-cold-soba-noodles/", "name_en": "Zaru Soba (Cold Soba with Dipping Sauce)", "name_cz": "Zaru Soba (studené nudle soba s omáčkou na namáčení)", "time": "15 min", "desc_en": "Chilled buckwheat noodles served with a savory homemade dipping sauce, green onion, and shredded nori.", "desc_cz": "Vychlazené pohankové nudle podávané s domácí slanou omáčkou na namáčení, jarní cibulkou a nastrouhanými řasami nori.", "ingredients": [{"en": "Dried soba noodles – for 4 servings", "cz": "Sušené nudle soba – na 4 porce", "opt": false}, {"en": "Katsuobushi (dried bonito flakes) – ½–1 cup packed", "cz": "Katsuobushi (sušené vločky bonita) – ½–1 hrnku natěsno", "opt": false}, {"en": "Kombu (dried kelp) – 1 piece", "cz": "Kombu (sušené kelp) – 1 kus", "opt": false}, {"en": "Water – for dashi", "cz": "Voda – na vývar dashi", "opt": false}, {"en": "Sake – ¼ cup", "cz": "Saké – 60 ml", "opt": false}, {"en": "Mirin – ½ cup", "cz": "Mirin – 120 ml", "opt": false}, {"en": "Soy sauce – to taste (approx. ¼ cup)", "cz": "Sójová omáčka – dle chuti (cca 60 ml)", "opt": false}, {"en": "Green onion/scallion, chopped, for garnish", "cz": "Jarní cibulka, nasekaná, na ozdobu", "opt": true}, {"en": "Shredded nori seaweed, for garnish", "cz": "Nastrouhané řasy nori, na ozdobu", "opt": true}, {"en": "Wasabi, for garnish", "cz": "Wasabi, na ozdobu", "opt": true}]}, {"url": "https://www.justonecookbook.com/pan-fried-curry-chicken/", "name_en": "Pan-Fried Curry Chicken", "name_cz": "Kuřecí maso na pánvi s kari", "time": "20 min", "desc_en": "Chicken tenders pan-fried and coated in a light, savory curry-spiced sauce with a hint of Kewpie mayo.", "desc_cz": "Kuřecí nudličky opečené na pánvi a obalené v lehké slané omáčce s kari kořením a špetkou majonézy Kewpie.", "ingredients": [{"en": "Chicken tenders (or thighs/breast)", "cz": "Kuřecí nudličky (nebo stehna/prsa)", "opt": false}, {"en": "Soy sauce – 2 Tbsp", "cz": "Sójová omáčka – 2 lžíce", "opt": false}, {"en": "Mirin – 2 Tbsp", "cz": "Mirin – 2 lžíce", "opt": false}, {"en": "Japanese curry powder – 1 tsp", "cz": "Japonské kari koření – 1 lžička", "opt": false}, {"en": "Sugar – 1 tsp", "cz": "Cukr – 1 lžička", "opt": false}, {"en": "Japanese Kewpie mayonnaise, for serving", "cz": "Japonská majonéza Kewpie, k podávání", "opt": true}, {"en": "Neutral oil, for pan-frying", "cz": "Neutrální olej, na smažení", "opt": false}]}, {"url": "https://www.justonecookbook.com/yakitori-don/", "name_en": "Yakitori Don", "name_cz": "Yakitori Don (rýže s kuřecím masem)", "time": "20 min", "desc_en": "Pan-seared chicken and green onion glazed in a sweet-savory yakitori sauce, served over rice.", "desc_cz": "Kuřecí maso a jarní cibulka opečené na pánvi a glazované sladko-slanou omáčkou yakitori, podávané na rýži.", "ingredients": [{"en": "Boneless, skinless chicken thighs – 2 pieces (10 oz/284 g)", "cz": "Kuřecí stehna bez kosti a kůže – 2 kusy (284 g)", "opt": false}, {"en": "Tokyo negi (long green onion) or 3 thick scallions", "cz": "Jarní cibulka (silnější druh) – 3 ks", "opt": false}, {"en": "Shredded nori seaweed, for garnish", "cz": "Nastrouhané řasy nori, na ozdobu", "opt": true}, {"en": "Cooked Japanese short-grain rice – 2 servings", "cz": "Vařená japonská rýže – 2 porce", "opt": false}, {"en": "All-purpose flour – 2 Tbsp, for dusting", "cz": "Hladká mouka – 2 lžíce, na obalení", "opt": false}, {"en": "Soy sauce – 3 Tbsp", "cz": "Sójová omáčka – 3 lžíce", "opt": false}, {"en": "Neutral oil – 1–2 Tbsp", "cz": "Neutrální olej – 1–2 lžíce", "opt": false}, {"en": "Mirin – 3 Tbsp", "cz": "Mirin – 3 lžíce", "opt": false}, {"en": "Sugar – 1 tsp", "cz": "Cukr – 1 lžička", "opt": false}, {"en": "Shichimi togarashi (Japanese seven spice), for a spicy kick", "cz": "Shichimi togarashi (japonské sedmikoření), na dochucení", "opt": true}]}, {"url": "https://www.justonecookbook.com/chicken-yakisoba/", "name_en": "Easy Chicken Yakisoba", "name_cz": "Jednoduché kuřecí yakisoba", "time": "20 min", "desc_en": "Stir-fried yakisoba noodles with chicken thigh, cabbage, onion, and carrot in a sweet-savory sauce.", "desc_cz": "Smažené nudle yakisoba s kuřecím stehnem, zelím, cibulí a mrkví ve sladko-slané omáčce.", "ingredients": [{"en": "Yakisoba noodles – 1 serving", "cz": "Nudle yakisoba – 1 porce", "opt": false}, {"en": "Boneless, skinless chicken thigh – 1", "cz": "Kuřecí stehno bez kosti a kůže – 1 ks", "opt": false}, {"en": "Green cabbage leaves – 2, cut into squares", "cz": "Listy zelí – 2 ks, nakrájené na kostičky", "opt": false}, {"en": "Onion – ¼, sliced", "cz": "Cibule – ¼ ks, nakrájená", "opt": false}, {"en": "Carrot – 4 inches, julienned", "cz": "Mrkev – asi 10 cm, na tenké nudličky", "opt": false}, {"en": "Yakisoba sauce (packet, bottled, or homemade) – 1 serving, to taste", "cz": "Omáčka yakisoba (sáček, kupovaná nebo domácí) – 1 porce, dle chuti", "opt": false}, {"en": "Neutral oil, for stir-frying", "cz": "Neutrální olej, na smažení", "opt": false}]}, {"url": "https://www.justonecookbook.com/poke-bowl/", "name_en": "Poke Bowl", "name_cz": "Poke Bowl (miska s tuňákem a lososem)", "time": "15 min", "desc_en": "Cubed sashimi-grade tuna and salmon marinated in soy-sesame dressing, served over rice with fresh toppings.", "desc_cz": "Kostičky lososa a tuňáku v kvalitě na syrovou přípravu marinované v sójovo-sezamovém dresinku, podávané na rýži s čerstvými přílohami.", "ingredients": [{"en": "Sashimi-grade tuna – ½ lb (225 g)", "cz": "Tuňák v kvalitě na syrovou přípravu – 225 g", "opt": false}, {"en": "Sashimi-grade salmon – ½ lb (225 g)", "cz": "Losos v kvalitě na syrovou přípravu – 225 g", "opt": false}, {"en": "Hawaiian ogo seaweed, a small clump", "cz": "Havajské řasy ogo, malý chomáček", "opt": true}, {"en": "Green onion/scallion – 1", "cz": "Jarní cibulka – 1 ks", "opt": false}, {"en": "Sweet onion – ¼", "cz": "Sladká cibule – ¼ ks", "opt": false}, {"en": "Cooked Japanese short-grain rice – 3 servings", "cz": "Vařená japonská rýže – 3 porce", "opt": false}, {"en": "Soy sauce – 3 Tbsp", "cz": "Sójová omáčka – 3 lžíce", "opt": false}, {"en": "Rice vinegar, unseasoned – 2 tsp", "cz": "Rýžový ocet, neochucený – 2 lžičky", "opt": false}, {"en": "Toasted sesame oil – 1 Tbsp", "cz": "Pražený sezamový olej – 1 lžíce", "opt": false}, {"en": "Toasted white sesame seeds – ½ Tbsp", "cz": "Pražený bílý sezam – ½ lžíce", "opt": false}, {"en": "Salt – ⅛ tsp", "cz": "Sůl – špetka", "opt": false}, {"en": "Avocado, sliced or cubed, for topping", "cz": "Avokádo, plátky nebo kostičky, jako příloha", "opt": true}, {"en": "Shelled edamame, boiled, for topping", "cz": "Loupaný edamame, vařený, jako příloha", "opt": true}, {"en": "Cucumber, cubed or sliced, for topping", "cz": "Okurka, kostičky nebo plátky, jako příloha", "opt": true}, {"en": "Red radish, thinly sliced, for topping", "cz": "Ředkvička, tence nakrájená, jako příloha", "opt": true}, {"en": "Sushi ginger (gari), for topping", "cz": "Nakládaný zázvor (gari), jako příloha", "opt": true}, {"en": "Furikake (rice seasoning), for topping", "cz": "Furikake (rýžové koření), jako příloha", "opt": true}]}, {"url": "https://www.justonecookbook.com/udon-noodle-soup/", "name_en": "Udon Noodle Soup (Kake Udon)", "name_cz": "Polévka s nudlemi udon (Kake Udon)", "time": "15 min", "desc_en": "Chewy udon noodles in a light, savory dashi broth, topped with green onion and wakame seaweed.", "desc_cz": "Nudle udon v lehkém slaném vývaru dashi, ozdobené jarní cibulkou a mořskými řasami wakame.", "ingredients": [{"en": "Udon noodles – 2 servings", "cz": "Nudle udon – 2 porce", "opt": false}, {"en": "Dashi (Japanese soup stock) – 2⅓ cups", "cz": "Vývar dashi – 560 ml", "opt": false}, {"en": "Mirin – 1 Tbsp", "cz": "Mirin – 1 lžíce", "opt": false}, {"en": "Sugar – 1 tsp", "cz": "Cukr – 1 lžička", "opt": false}, {"en": "Soy sauce – 1½ Tbsp", "cz": "Sójová omáčka – 1½ lžíce", "opt": false}, {"en": "Salt – ⅛–¼ tsp", "cz": "Sůl – špetka", "opt": false}, {"en": "Green onion, sliced, for garnish", "cz": "Jarní cibulka, nakrájená, na ozdobu", "opt": true}, {"en": "Dried wakame seaweed, for garnish", "cz": "Sušené řasy wakame, na ozdobu", "opt": true}]}, {"url": "https://www.justonecookbook.com/10-minute-meal-japanese-curry/", "name_en": "Easy Japanese Curry (Single Serving)", "name_cz": "Rychlé japonské kari (na jednu porci)", "time": "15 min", "desc_en": "A single-serving Japanese curry made fast with chicken thigh, potato, carrot, and curry roux cubes.", "desc_cz": "Japonské kari na jednu porci, rychle připravené z kuřecího stehna, brambor, mrkve a kostek kari roux.", "ingredients": [{"en": "Boneless, skinless chicken thigh – 5 oz (140 g)", "cz": "Kuřecí stehno bez kosti a kůže – 140 g", "opt": false}, {"en": "Onion – ½ (140 g)", "cz": "Cibule – ½ ks (140 g)", "opt": false}, {"en": "Carrot – ½ (90 g)", "cz": "Mrkev – ½ ks (90 g)", "opt": false}, {"en": "Russet potato – ½ (130 g)", "cz": "Brambora – ½ ks (130 g)", "opt": false}, {"en": "Cooked Japanese short-grain rice – 1 serving", "cz": "Vařená japonská rýže – 1 porce", "opt": false}, {"en": "Japanese curry roux – 2 cubes (55 g)", "cz": "Japonské kari roux – 2 kostky (55 g)", "opt": false}, {"en": "Neutral oil – 1 Tbsp", "cz": "Neutrální olej – 1 lžíce", "opt": false}, {"en": "Black pepper – ⅛ tsp", "cz": "Černý pepř – špetka", "opt": false}, {"en": "Salt – ⅛ tsp", "cz": "Sůl – špetka", "opt": false}, {"en": "Water – 2 cups", "cz": "Voda – 480 ml", "opt": false}, {"en": "Fukujinzuke (Japanese red pickled vegetables), for serving", "cz": "Fukujinzuke (japonská červená nakládaná zelenina), k podávání", "opt": true}]}, {"url": "https://www.justonecookbook.com/easy-fried-rice/", "name_en": "Japanese Fried Rice (Yakimeshi)", "name_cz": "Japonská smažená rýže (Yakimeshi)", "time": "15 min", "desc_en": "Classic Japanese fried rice with ham, egg, and green onion, ready in 15 minutes.", "desc_cz": "Klasická japonská smažená rýže se šunkou, vejcem a jarní cibulkou, hotová za 15 minut.", "ingredients": [{"en": "Ham – 2 slices", "cz": "Šunka – 2 plátky", "opt": false}, {"en": "Green onion/scallion – 1", "cz": "Jarní cibulka – 1 ks", "opt": false}, {"en": "Cooked Japanese short-grain rice – 2 servings (day-old preferred)", "cz": "Vařená japonská rýže – 2 porce (nejlépe den stará)", "opt": false}, {"en": "Large egg – 1", "cz": "Vejce velké – 1 ks", "opt": false}, {"en": "Soy sauce – 2 tsp", "cz": "Sójová omáčka – 2 lžičky", "opt": false}, {"en": "Neutral oil – 2 Tbsp, divided", "cz": "Neutrální olej – 2 lžíce, rozděleno", "opt": false}, {"en": "White pepper powder – ⅛ tsp", "cz": "Bílý pepř mletý – špetka", "opt": false}, {"en": "Salt – ½ tsp", "cz": "Sůl – ½ lžičky", "opt": false}]}, {"url": "https://www.justonecookbook.com/ochazuke/", "name_en": "Ochazuke (Green Tea Over Rice)", "name_cz": "Ochazuke (rýže se zeleným čajem)", "time": "10 min", "desc_en": "Steamed rice topped with salted salmon and crispy rice crackers, then bathed in hot green tea for a comforting light meal.", "desc_cz": "Vařená rýže s osoleným lososem a křupavými rýžovými krekry, zalitá horkým zeleným čajem – útěšné lehké jídlo.", "ingredients": [{"en": "Cooked Japanese short-grain rice – 2 servings", "cz": "Vařená japonská rýže – 2 porce", "opt": false}, {"en": "Japanese salted salmon (shiozake), cooked and flaked", "cz": "Japonský solený losos (shiozake), uvařený a rozdrobený", "opt": false}, {"en": "Bubu arare (crispy puffed rice pellets)", "cz": "Bubu arare (křupavé rýžové kuličky)", "opt": true}, {"en": "Japanese green tea leaves (genmaicha, sencha, or hojicha) – 2 tsp", "cz": "Japonský zelený čaj (genmaicha, sencha nebo hojicha) – 2 lžičky", "opt": false}, {"en": "Hot water – 1 cup", "cz": "Horká voda – 240 ml", "opt": false}]}, {"url": "https://www.justonecookbook.com/pan-fried-ginger-pork-belly/", "name_en": "Pan-Fried Ginger Pork Belly", "name_cz": "Vepřový bůček na pánvi se zázvorem", "time": "20 min", "desc_en": "Sliced pork belly pan-fried with cabbage and green onion in a savory soy sauce base with a touch of spicy ginger.", "desc_cz": "Plátky vepřového bůčku opečené na pánvi se zelím a jarní cibulkou ve slané sójové omáčce se špetkou pálivého zázvoru.", "ingredients": [{"en": "Green cabbage – ¼ head (11 oz/312 g)", "cz": "Zelí – ¼ hlávky (312 g)", "opt": false}, {"en": "Tokyo negi (long green onion) or 2–3 green onions", "cz": "Jarní cibulka (silnější druh) – 2–3 ks", "opt": false}, {"en": "Ginger, grated – 1 tsp", "cz": "Zázvor, nastrouhaný – 1 lžička", "opt": false}, {"en": "Sliced pork belly – 8 oz (225 g)", "cz": "Plátky vepřového bůčku – 225 g", "opt": false}, {"en": "Soy sauce, sugar and neutral oil, for the sauce and cooking", "cz": "Sójová omáčka, cukr a neutrální olej, na omáčku a smažení", "opt": false}]}, {"url": "https://www.justonecookbook.com/simmered-beef-with-ginger-shigureni/", "name_en": "Simmered Beef with Ginger (Shigureni)", "name_cz": "Dušené hovězí se zázvorem (Shigureni)", "time": "20 min", "desc_en": "Thin-sliced beef simmered with julienned ginger in a sweet-salty soy sauce glaze until the liquid nearly evaporates.", "desc_cz": "Tence nakrájené hovězí maso dušené s nastrouhaným zázvorem ve sladko-slané sójové glazuře, dokud se tekutina téměř nevypaří.", "ingredients": [{"en": "Thinly sliced beef (ribeye or similar) – ½ lb (225 g)", "cz": "Tence nakrájené hovězí maso (roštěná) – 225 g", "opt": false}, {"en": "Ginger – 1 knob (1 inch/2.5 cm), julienned", "cz": "Zázvor – 1 kus (asi 2,5 cm), na tenké nudličky", "opt": false}, {"en": "Soy sauce – 2 Tbsp", "cz": "Sójová omáčka – 2 lžíce", "opt": false}, {"en": "Sake – 2 Tbsp", "cz": "Saké – 2 lžíce", "opt": false}, {"en": "Mirin – 2 Tbsp", "cz": "Mirin – 2 lžíce", "opt": false}, {"en": "Sugar – 1 tsp, to taste", "cz": "Cukr – 1 lžička, dle chuti", "opt": true}]}, {"url": "https://www.justonecookbook.com/butadon-pork-donburi/", "name_en": "Butadon (Pork Donburi)", "name_cz": "Butadon (rýže s vepřovým masem)", "time": "20 min", "desc_en": "Grilled thin-sliced pork loin topped with a caramelized sweet soy sauce, served over rice — a Hokkaido specialty.", "desc_cz": "Grilované tence nakrájené vepřové maso s karamelizovanou sladkou sójovou omáčkou, podávané na rýži – specialita z Hokkaida.", "ingredients": [{"en": "Thinly sliced pork loin – ½ lb (225 g)", "cz": "Tence nakrájená vepřová panenka – 225 g", "opt": false}, {"en": "Neutral oil – 1 Tbsp", "cz": "Neutrální olej – 1 lžíce", "opt": false}, {"en": "Cooked Japanese short-grain rice – 2 servings", "cz": "Vařená japonská rýže – 2 porce", "opt": false}, {"en": "Sugar – 3 Tbsp, for caramel", "cz": "Cukr – 3 lžíce, na karamel", "opt": false}, {"en": "Water – 1 Tbsp (plus 4 Tbsp boiling water), for caramel", "cz": "Voda – 1 lžíce (plus 4 lžíce vroucí vody), na karamel", "opt": false}, {"en": "Soy sauce – 3 Tbsp", "cz": "Sójová omáčka – 3 lžíce", "opt": false}, {"en": "Sake – 2 Tbsp", "cz": "Saké – 2 lžíce", "opt": false}, {"en": "Black pepper, freshly ground, for garnish", "cz": "Černý pepř, čerstvě mletý, na ozdobu", "opt": false}, {"en": "Tokyo negi (long green onion, white part) – 4 inches, or chopped scallions", "cz": "Jarní cibulka (bílá část) – asi 10 cm, nebo nasekaná cibulka", "opt": true}, {"en": "Pickled red ginger, for garnish", "cz": "Nakládaný červený zázvor, na ozdobu", "opt": true}]}, {"url": "https://www.justonecookbook.com/chicken-fried-rice/", "name_en": "Chicken Fried Rice (Midnight Diner Style)", "name_cz": "Kuřecí smažená rýže (styl Midnight Diner)", "time": "20 min", "desc_en": "Nostalgic Japanese ketchup-based fried rice with chicken, made famous by the show Midnight Diner.", "desc_cz": "Nostalgická japonská smažená rýže s kuřecím masem a kečupovou omáčkou, proslavená seriálem Midnight Diner.", "ingredients": [{"en": "Cooked Japanese short-grain rice, day-old – 2 servings", "cz": "Vařená japonská rýže, den stará – 2 porce", "opt": false}, {"en": "Chicken thigh, diced", "cz": "Kuřecí stehno, na kostičky", "opt": false}, {"en": "Onion, diced", "cz": "Cibule, na kostičky", "opt": false}, {"en": "Ketchup – 3 Tbsp", "cz": "Kečup – 3 lžíce", "opt": false}, {"en": "Tomato paste – 3 Tbsp", "cz": "Rajčatový protlak – 3 lžíce", "opt": false}, {"en": "Water – 2 Tbsp", "cz": "Voda – 2 lžíce", "opt": false}, {"en": "Green peas, for garnish", "cz": "Hrášek, na ozdobu", "opt": true}]}, {"url": "https://www.justonecookbook.com/classic-mentaiko-pasta/", "name_en": "Classic Mentaiko Pasta", "name_cz": "Klasické těstoviny s mentaiko (pikantní tresčí jikry)", "time": "20 min", "desc_en": "Al dente spaghetti tossed in a buttery cream sauce with spicy salted cod roe, topped with nori and shiso.", "desc_cz": "Těstoviny al dente promíchané s máslovo-smetanovou omáčkou s pikantními solenými tresčími jikry, ozdobené nori a shiso.", "ingredients": [{"en": "Spicy salted pollock or cod roe (karashi mentaiko) – 2 sacs (about 1 oz/30 g each)", "cz": "Pikantní solené tresčí/treskoví jikry (karashi mentaiko) – 2 kusy (30 g)", "opt": false}, {"en": "Spaghetti – 8 oz (225 g)", "cz": "Špagety – 225 g", "opt": false}, {"en": "Whole milk – 2 Tbsp", "cz": "Plnotučné mléko – 2 lžíce", "opt": false}, {"en": "Heavy (whipping) cream – 2 Tbsp", "cz": "Smetana ke šlehání – 2 lžíce", "opt": false}, {"en": "Unsalted butter, melted – 2 Tbsp", "cz": "Máslo neslazené, rozpuštěné – 2 lžíce", "opt": false}, {"en": "Soy sauce – 1 Tbsp", "cz": "Sójová omáčka – 1 lžíce", "opt": false}, {"en": "Salt – 2 Tbsp, for boiling the pasta", "cz": "Sůl – 2 lžíce, na vaření těstovin", "opt": false}, {"en": "Shredded nori seaweed, for garnish", "cz": "Nastrouhané řasy nori, na ozdobu", "opt": true}, {"en": "Shiso leaves, for garnish", "cz": "Listy shiso, na ozdobu", "opt": true}, {"en": "Black pepper, freshly ground, for garnish", "cz": "Černý pepř, čerstvě mletý, na ozdobu", "opt": true}]}, {"url": "https://www.justonecookbook.com/japanese-tofu-cold-tofu-hiyayakko/", "name_en": "Hiyayakko (Japanese Cold Tofu)", "name_cz": "Hiyayakko (studené japonské tofu)", "time": "10 min", "desc_en": "Chilled silken tofu topped with bonito flakes, green onion, and grated ginger — a no-cook Japanese classic.", "desc_cz": "Vychlazené hedvábné tofu ozdobené vločkami bonita, jarní cibulkou a nastrouhaným zázvorem – japonská klasika bez vaření.", "ingredients": [{"en": "Soft/silken tofu – 14 oz (400 g), chilled", "cz": "Hedvábné tofu – 400 g, vychlazené", "opt": false}, {"en": "Katsuobushi (dried bonito flakes) – 2 Tbsp (skip for vegan)", "cz": "Katsuobushi (sušené vločky bonita) – 2 lžíce (vynechte pro veganskou verzi)", "opt": true}, {"en": "Green onion/scallion – 1", "cz": "Jarní cibulka – 1 ks", "opt": false}, {"en": "Ginger, grated – ½ tsp", "cz": "Zázvor, nastrouhaný – ½ lžičky", "opt": false}, {"en": "Shiso leaves, for decoration", "cz": "Listy shiso, na ozdobu", "opt": true}, {"en": "Soy sauce, to taste", "cz": "Sójová omáčka, dle chuti", "opt": false}]}, {"url": "https://www.justonecookbook.com/tan-tan-udon/", "name_en": "Tan Tan Udon", "name_cz": "Tan Tan Udon", "time": "15 min", "desc_en": "Udon noodles in a creamy sesame-soy milk broth, topped with savory ground pork, bok choy, and green onion.", "desc_cz": "Nudle udon v krémovém vývaru ze sezamu a sójového mléka, s vepřovým mletým masem, pak-choi a jarní cibulkou.", "ingredients": [{"en": "Udon noodles – 2 servings", "cz": "Nudle udon – 2 porce", "opt": false}, {"en": "Chicken stock/broth – 2 cups", "cz": "Kuřecí vývar – 480 ml", "opt": false}, {"en": "Unsweetened soy milk – 1 cup", "cz": "Neslazené sójové mléko – 240 ml", "opt": false}, {"en": "Soy sauce – 1 Tbsp", "cz": "Sójová omáčka – 1 lžíce", "opt": false}, {"en": "Toasted white sesame seeds, ground – 4 Tbsp", "cz": "Pražený bílý sezam, mletý – 4 lžíce", "opt": false}, {"en": "Ground pork, seasoned, for topping", "cz": "Mleté vepřové maso, ochucené, jako topping", "opt": false}, {"en": "Bok choy, for topping", "cz": "Pak-choi, jako topping", "opt": true}, {"en": "Green onion, sliced, for garnish", "cz": "Jarní cibulka, nakrájená, na ozdobu", "opt": true}, {"en": "La-yu (Japanese chili oil), for extra heat", "cz": "La-jou (japonský chilli olej), na dochucení", "opt": true}]}, {"url": "https://www.justonecookbook.com/gapao-rice/", "name_en": "Gapao Rice", "name_cz": "Gapao rýže (thajské bazalkové vepřové)", "time": "15 min", "desc_en": "Japanese take on Thai pad krapao: a bold basil pork stir-fry served over rice with a fried egg.", "desc_cz": "Japonská verze thajského pad krapao: pikantní vepřové maso s bazalkou, podávané na rýži se smaženým vejcem.", "ingredients": [{"en": "Ground pork – ½ lb (225 g)", "cz": "Mleté vepřové maso – 225 g", "opt": false}, {"en": "Onion, small – ½", "cz": "Cibule, malá – ½ ks", "opt": false}, {"en": "Red bell pepper – ¼, seeds removed", "cz": "Červená paprika – ¼ ks, bez semínek", "opt": false}, {"en": "Bird's eye chili (Thai chili) – 1–2", "cz": "Thajské chilli papričky – 1–2 ks", "opt": false}, {"en": "Basil leaves – 10 (ideally holy basil)", "cz": "Listy bazalky – 10 ks (nejlépe posvátná bazalka)", "opt": false}, {"en": "Cooked Japanese short-grain rice – 2 servings", "cz": "Vařená japonská rýže – 2 porce", "opt": false}, {"en": "Fried eggs – 2", "cz": "Smažená vejce – 2 ks", "opt": false}, {"en": "Soy sauce – 1½ Tbsp", "cz": "Sójová omáčka – 1½ lžíce", "opt": false}, {"en": "Oyster sauce – ½ Tbsp", "cz": "Ústřicová omáčka – ½ lžíce", "opt": false}, {"en": "Fish sauce – 2 tsp", "cz": "Rybí omáčka – 2 lžičky", "opt": false}, {"en": "Neutral oil – 1 Tbsp", "cz": "Neutrální olej – 1 lžíce", "opt": false}, {"en": "Garlic – 3 cloves", "cz": "Česnek – 3 stroužky", "opt": false}, {"en": "Sugar – 1½ tsp", "cz": "Cukr – 1½ lžičky", "opt": false}, {"en": "Water – 2 Tbsp", "cz": "Voda – 2 lžíce", "opt": false}]}, {"url": "https://www.justonecookbook.com/beef-teriyaki/", "name_en": "Beef Teriyaki", "name_cz": "Hovězí teriyaki", "time": "30 min (+ marinating)", "desc_en": "Pan-grilled ribeye steak glazed with a homemade teriyaki sauce brightened with fresh ginger juice.", "desc_cz": "Na pánvi grilovaný steak z roštěné, glazovaný domácí teriyaki omáčkou s čerstvou zázvorovou šťávou.", "ingredients": [{"en": "Beef ribeye steaks – 2, each ½ inch (1.25 cm) thick", "cz": "Hovězí steaky z roštěné – 2 ks, tloušťka asi 1,25 cm", "opt": false}, {"en": "Green onion/scallion – 1", "cz": "Jarní cibulka – 1 ks", "opt": false}, {"en": "Potato starch or cornstarch – ½ tsp", "cz": "Bramborový nebo kukuřičný škrob – ½ lžičky", "opt": true}, {"en": "Soy sauce – ¼ cup (4 Tbsp)", "cz": "Sójová omáčka – 60 ml (4 lžíce)", "opt": false}, {"en": "Neutral oil – 1 Tbsp", "cz": "Neutrální olej – 1 lžíce", "opt": false}, {"en": "Toasted white sesame seeds – 1 tsp, for garnish", "cz": "Pražený bílý sezam – 1 lžička, na ozdobu", "opt": true}, {"en": "Sake – ¼ cup (4 Tbsp)", "cz": "Saké – 60 ml (4 lžíce)", "opt": false}, {"en": "Mirin – ¼ cup (4 Tbsp)", "cz": "Mirin – 60 ml (4 lžíce)", "opt": false}, {"en": "Ginger juice, from grated ginger – 1½ tsp", "cz": "Zázvorová šťáva, z nastrouhaného zázvoru – 1½ lžičky", "opt": false}, {"en": "Sugar – 2 tsp", "cz": "Cukr – 2 lžičky", "opt": false}, {"en": "Water – 1 tsp", "cz": "Voda – 1 lžička", "opt": true}]}, {"url": "https://www.justonecookbook.com/yellowtail-teriyaki/", "name_en": "Yellowtail Teriyaki (Buri no Teriyaki)", "name_cz": "Žlutoocasý tuňák teriyaki (Buri no Teriyaki)", "time": "20 min", "desc_en": "Pan-fried yellowtail fillets glazed with teriyaki sauce, served with charred green onion and shishito peppers.", "desc_cz": "Filety žlutoocasého tuňáka opečené na pánvi a glazované teriyaki omáčkou, podávané s opečenou jarní cibulkou a paprikami shishito.", "ingredients": [{"en": "Yellowtail fillets (hamachi/buri) – 2 (7.8 oz/220 g)", "cz": "Filety žlutoocasého tuňáka (hamachi/buri) – 2 ks (220 g)", "opt": false}, {"en": "Tokyo negi (long green onion, white part) – 1", "cz": "Jarní cibulka (bílá část) – 1 ks", "opt": false}, {"en": "Shishito peppers – 4", "cz": "Papriky shishito – 4 ks", "opt": true}, {"en": "All-purpose flour – 1 Tbsp", "cz": "Hladká mouka – 1 lžíce", "opt": false}, {"en": "Soy sauce – 2 Tbsp", "cz": "Sójová omáčka – 2 lžíce", "opt": false}, {"en": "Neutral oil – 1 Tbsp", "cz": "Neutrální olej – 1 lžíce", "opt": false}, {"en": "Sake – 2 Tbsp", "cz": "Saké – 2 lžíce", "opt": false}, {"en": "Mirin – 2 Tbsp", "cz": "Mirin – 2 lžíce", "opt": false}, {"en": "Salt – 1 tsp", "cz": "Sůl – 1 lžička", "opt": false}, {"en": "Sugar – 1 Tbsp", "cz": "Cukr – 1 lžíce", "opt": false}]}, {"url": "https://www.justonecookbook.com/stir-fry-vegetables/", "name_en": "Stir-Fried Vegetables (Yasai Itame)", "name_cz": "Smažená zelenina (Yasai Itame)", "time": "15 min", "desc_en": "A crisp, savory stir-fry of pork, cabbage, carrot, snow peas, and bean sprouts, ready in 15 minutes.", "desc_cz": "Křupavá slaná směs vepřového masa, zelí, mrkve, hrachových lusků a fazolových klíčků, hotová za 15 minut.", "ingredients": [{"en": "Thinly sliced pork – 6.5 oz (185 g), skip for vegetarian", "cz": "Tence nakrájené vepřové maso – 185 g, vynechte pro vegetariánskou verzi", "opt": true}, {"en": "Snow peas – 10 (about 1 oz/30 g)", "cz": "Hrachové lusky – 10 ks (30 g)", "opt": false}, {"en": "Onion – ¼ (3 oz/90 g)", "cz": "Cibule – ¼ ks (90 g)", "opt": false}, {"en": "Green cabbage – ¼ (7 oz/200 g)", "cz": "Zelí – ¼ hlávky (200 g)", "opt": false}, {"en": "Carrot – ½ (3 oz/90 g)", "cz": "Mrkev – ½ ks (90 g)", "opt": false}, {"en": "Garlic – 1 clove", "cz": "Česnek – 1 stroužek", "opt": false}, {"en": "Ginger – 1 inch (2.5 cm)", "cz": "Zázvor – asi 2,5 cm", "opt": false}, {"en": "Neutral oil – 1 Tbsp", "cz": "Neutrální olej – 1 lžíce", "opt": false}, {"en": "Bean sprouts – 2 cups (3.9 oz/110 g)", "cz": "Fazolové klíčky – 110 g", "opt": false}, {"en": "Soy sauce – 1 tsp, for pork marinade, plus 1 tsp for seasoning", "cz": "Sójová omáčka – 1 lžička na marinádu masa, plus 1 lžička na dochucení", "opt": false}, {"en": "Sake – 1 tsp, for pork marinade", "cz": "Saké – 1 lžička, na marinádu masa", "opt": true}, {"en": "Oyster sauce – 1 tsp", "cz": "Ústřicová omáčka – 1 lžička", "opt": false}, {"en": "Salt and black pepper, to taste", "cz": "Sůl a černý pepř, dle chuti", "opt": false}, {"en": "Toasted sesame oil – 2 tsp", "cz": "Pražený sezamový olej – 2 lžičky", "opt": false}]}, {"url": "https://www.justonecookbook.com/tamago-kake-gohan/", "name_en": "Tamago Kake Gohan (TKG, Egg on Rice)", "name_cz": "Tamago Kake Gohan (rýže s vejcem)", "time": "5 min", "desc_en": "A classic 3-ingredient Japanese comfort breakfast: hot rice topped with a raw egg and soy sauce, mixed together.", "desc_cz": "Klasická japonská snídaně ze 3 surovin: horká rýže s vejcem a sójovou omáčkou, vše promíchané dohromady.", "ingredients": [{"en": "Cooked Japanese short-grain rice – 1 serving, hot", "cz": "Vařená japonská rýže – 1 porce, horká", "opt": false}, {"en": "Large egg – 1", "cz": "Vejce velké – 1 ks", "opt": false}, {"en": "Soy sauce, good quality", "cz": "Sójová omáčka, kvalitní", "opt": false}, {"en": "Toppings of choice (katsuobushi, furikake, nori, chopped green onion, or natto)", "cz": "Přílohy dle výběru (katsuobushi, furikake, nori, jarní cibulka nebo natto)", "opt": true}]}, {"url": "https://www.justonecookbook.com/niratama-donburi/", "name_en": "Niratama Donburi (Garlic Chives and Egg Over Rice)", "name_cz": "Niratama Donburi (pažitka a vejce na rýži)", "time": "10 min", "desc_en": "Fluffy stir-fried eggs with garlic chives served over rice, ready in 10 minutes with just a few pantry staples.", "desc_cz": "Nadýchaná míchaná vejce s pažitkou podávaná na rýži, hotová za 10 minut jen z pár surovin ze spíže.", "ingredients": [{"en": "Cooked Japanese short-grain rice – 2 servings", "cz": "Vařená japonská rýže – 2 porce", "opt": false}, {"en": "Large eggs – 3", "cz": "Vejce velká – 3 ks", "opt": false}, {"en": "Soy sauce – ½ tsp", "cz": "Sójová omáčka – ½ lžičky", "opt": false}, {"en": "Toasted sesame oil – ½ Tbsp, for stir-frying chives", "cz": "Pražený sezamový olej – ½ lžíce, na osmažení pažitky", "opt": false}, {"en": "Neutral oil – 2 Tbsp", "cz": "Neutrální olej – 2 lžíce", "opt": false}, {"en": "Garlic chives (Chinese chives/nira) – 1 small bunch", "cz": "Pažitka česneková (čínská pažitka/nira) – 1 malý svazek", "opt": false}, {"en": "Sake – 1 tsp", "cz": "Saké – 1 lžička", "opt": false}, {"en": "Salt – ¼ tsp", "cz": "Sůl – ¼ lžičky", "opt": false}, {"en": "Black pepper, freshly ground", "cz": "Černý pepř, čerstvě mletý", "opt": false}, {"en": "Crunchy garlic chili oil (taberu rayu), for topping", "cz": "Křupavý česnekový chilli olej (taberu rayu), na dochucení", "opt": true}]}, {"url": "https://www.justonecookbook.com/shrimp-fried-rice/", "name_en": "Shrimp Fried Rice", "name_cz": "Smažená rýže s krevetami", "time": "20 min", "desc_en": "Wok-charred fried rice with sweet shrimp, fluffy egg, and crisp lettuce, ready in under 20 minutes.", "desc_cz": "Smažená rýže z woku se sladkými krevetami, nadýchaným vejcem a křupavým salátem, hotová za necelých 20 minut.", "ingredients": [{"en": "Shrimp – 4 oz (6 shrimp), shelled and deveined", "cz": "Krevety – 115 g (6 ks), oloupané a zbavené střívka", "opt": false}, {"en": "Iceberg lettuce – 1 leaf (1 oz/30 g)", "cz": "Ledový salát – 1 list (30 g)", "opt": false}, {"en": "Green onion/scallion – 1", "cz": "Jarní cibulka – 1 ks", "opt": false}, {"en": "Cooked Japanese short-grain rice – 2 cups, preferably day-old", "cz": "Vařená japonská rýže – 2 hrnky, nejlépe den stará", "opt": false}, {"en": "Large egg – 1", "cz": "Vejce velké – 1 ks", "opt": false}, {"en": "Soy sauce – 1 tsp", "cz": "Sójová omáčka – 1 lžička", "opt": false}, {"en": "Neutral oil – 2 Tbsp", "cz": "Neutrální olej – 2 lžíce", "opt": false}, {"en": "Toasted sesame oil – 1 Tbsp", "cz": "Pražený sezamový olej – 1 lžíce", "opt": false}, {"en": "White pepper powder – ⅛ tsp", "cz": "Bílý pepř mletý – špetka", "opt": false}, {"en": "Sake – 1 tsp", "cz": "Saké – 1 lžička", "opt": false}, {"en": "Salt – ¼ tsp", "cz": "Sůl – ¼ lžičky", "opt": false}, {"en": "Black pepper, freshly ground", "cz": "Černý pepř, čerstvě mletý", "opt": false}]}, {"url": "https://www.justonecookbook.com/kimchi-fried-rice/", "name_en": "Kimchi Fried Rice", "name_cz": "Smažená rýže s kimchi", "time": "20 min", "desc_en": "Spicy and tangy fried rice made with napa cabbage kimchi, gochujang, and topped with a fried egg.", "desc_cz": "Pikantní a nakyslá smažená rýže s kimchi ze zelí pekingského, gochujangem a smaženým vejcem navrchu.", "ingredients": [{"en": "Green onions/scallions – 2", "cz": "Jarní cibulka – 2 ks", "opt": false}, {"en": "Korean seaweed, shredded, for garnish", "cz": "Korejské řasy, nastrouhané, na ozdobu", "opt": true}, {"en": "Cooked Japanese short-grain rice – 2 servings, preferably day-old", "cz": "Vařená japonská rýže – 2 porce, nejlépe den stará", "opt": false}, {"en": "Large eggs – 2, one fried egg per person to serve on top", "cz": "Vejce velká – 2 ks, jedno smažené na osobu navrch", "opt": false}, {"en": "Napa cabbage kimchi – 1 cup", "cz": "Kimchi z pekingského zelí – 1 hrnek", "opt": false}, {"en": "Soy sauce – ½ Tbsp", "cz": "Sójová omáčka – ½ lžíce", "opt": false}, {"en": "Neutral oil – 2 Tbsp, divided", "cz": "Neutrální olej – 2 lžíce, rozděleno", "opt": false}, {"en": "Toasted sesame oil – 1 tsp", "cz": "Pražený sezamový olej – 1 lžička", "opt": false}, {"en": "Gochujang (Korean chili paste) – 2 tsp", "cz": "Gochujang (korejská chilli pasta) – 2 lžičky", "opt": false}, {"en": "Toasted white sesame seeds – 1 tsp", "cz": "Pražený bílý sezam – 1 lžička", "opt": false}, {"en": "Kimchi juice, drained from jar – 2 Tbsp", "cz": "Šťáva z kimchi – 2 lžíce", "opt": false}, {"en": "Garlic – 2 cloves", "cz": "Česnek – 2 stroužky", "opt": false}, {"en": "Black pepper, freshly ground", "cz": "Černý pepř, čerstvě mletý", "opt": false}]}, {"url": "https://www.justonecookbook.com/somen/", "name_en": "Japanese Cold Somen Noodles", "name_cz": "Studené japonské nudle somen", "time": "20 min", "desc_en": "Thin chilled wheat noodles served with a savory dipping sauce, grated ginger, and scallion — a refreshing summer dish.", "desc_cz": "Tenké vychlazené pšeničné nudle podávané se slanou omáčkou na namáčení, nastrouhaným zázvorem a jarní cibulkou – osvěžující letní jídlo.", "ingredients": [{"en": "Dried somen noodles – for 2 servings", "cz": "Sušené nudle somen – na 2 porce", "opt": false}, {"en": "Mentsuyu (concentrated noodle soup base) – ¼ cup, diluted per bottle instructions", "cz": "Mentsuyu (koncentrovaný nudlový vývar) – 60 ml, naředěný dle návodu", "opt": false}, {"en": "Iced water – ½–1 cup, if using concentrated mentsuyu", "cz": "Ledová voda – 120–240 ml, při použití koncentrovaného mentsuyu", "opt": true}, {"en": "Ginger, grated, for garnish", "cz": "Zázvor, nastrouhaný, na ozdobu", "opt": true}, {"en": "Green onion/scallion, sliced, for garnish", "cz": "Jarní cibulka, nakrájená, na ozdobu", "opt": true}]}], "bento": [{"url": "https://www.justonecookbook.com/ramen-egg/", "name_en": "Ramen Eggs (Ajitsuke Tamago)", "name_cz": "Vajíčka do ramenu (Ajitsuke Tamago)", "time": "15 min (+ 8 hr marinating)", "desc_en": "Soft-boiled eggs with jammy yolks, marinated overnight in a sweet-savory soy sauce mixture.", "desc_cz": "Naměkko vařená vejce s krémovým žloutkem, marinovaná přes noc ve sladko-slané sójové směsi.", "ingredients": [{"en": "Large eggs – 4, refrigerated", "cz": "Vejce velká – 4 ks, z lednice", "opt": false}, {"en": "Soy sauce – ¼ cup", "cz": "Sójová omáčka – 60 ml", "opt": false}, {"en": "Mirin – ¼ cup", "cz": "Mirin – 60 ml", "opt": false}, {"en": "Sake (or water) – ¼ cup", "cz": "Saké (nebo voda) – 60 ml", "opt": true}, {"en": "Sugar – 1 tsp", "cz": "Cukr – 1 lžička", "opt": false}]}, {"url": "https://www.justonecookbook.com/karaage/", "name_en": "Karaage (Japanese Fried Chicken)", "name_cz": "Karaage (japonské smažené kuře)", "time": "30 min", "desc_en": "Bite-sized marinated chicken thigh pieces, coated in starch and fried until crispy on the outside, juicy inside.", "desc_cz": "Marinované kousky kuřecího stehna obalené ve škrobu a osmažené dokřupava zvenku a šťavnaté uvnitř.", "ingredients": [{"en": "Boneless, skin-on chicken thighs – 1½ lb (680 g), 4–6 pieces", "cz": "Kuřecí stehna bez kosti, s kůží – 680 g, 4–6 kusů", "opt": false}, {"en": "Ginger, grated with juice – ½ tsp", "cz": "Zázvor, nastrouhaný se šťávou – ½ lžičky", "opt": false}, {"en": "Potato starch or cornstarch – 2 Tbsp, plus more if needed", "cz": "Bramborový nebo kukuřičný škrob – 2 lžíce, případně více", "opt": false}, {"en": "All-purpose flour – 2 Tbsp, plus more if needed", "cz": "Hladká mouka – 2 lžíce, případně více", "opt": false}, {"en": "Soy sauce – ½–1 Tbsp", "cz": "Sójová omáčka – ½–1 lžíce", "opt": false}, {"en": "Toasted sesame oil – ½ tsp", "cz": "Pražený sezamový olej – ½ lžičky", "opt": false}, {"en": "Neutral oil – 3–4 cups, for deep-frying", "cz": "Neutrální olej – na fritování", "opt": false}, {"en": "Sake – ½ Tbsp", "cz": "Saké – ½ lžíce", "opt": true}, {"en": "Salt – ½ tsp", "cz": "Sůl – ½ lžičky", "opt": false}, {"en": "Black pepper – ⅛ tsp", "cz": "Černý pepř – špetka", "opt": false}, {"en": "Garlic – 1 clove", "cz": "Česnek – 1 stroužek", "opt": false}, {"en": "Lemon wedges, for serving", "cz": "Klínky citronu, k podávání", "opt": true}, {"en": "Japanese Kewpie mayonnaise, for serving", "cz": "Japonská majonéza Kewpie, k podávání", "opt": true}, {"en": "Shichimi togarashi (Japanese seven spice), for serving", "cz": "Shichimi togarashi (japonské sedmikoření), k podávání", "opt": true}]}, {"url": "https://www.justonecookbook.com/japanese-egg-sandwich-tamago-sando/", "name_en": "Japanese Egg Sandwich (Tamago Sando)", "name_cz": "Japonský vaječný sendvič (Tamago Sando)", "time": "30 min", "desc_en": "Creamy mashed-egg salad with Kewpie mayo, tucked between soft, pillowy Japanese milk bread.", "desc_cz": "Krémový vaječný salát s majonézou Kewpie mezi měkkým, nadýchaným japonským mléčným chlebem.", "ingredients": [{"en": "Shokupan (Japanese milk bread) – 4 slices", "cz": "Shokupan (japonský mléčný chléb) – 4 plátky", "opt": false}, {"en": "Large eggs – 3", "cz": "Vejce velká – 3 ks", "opt": false}, {"en": "Milk – 2 tsp", "cz": "Mléko – 2 lžičky", "opt": false}, {"en": "Japanese Kewpie mayonnaise – 2 Tbsp", "cz": "Japonská majonéza Kewpie – 2 lžíce", "opt": false}, {"en": "Sugar – ¼ tsp", "cz": "Cukr – ¼ lžičky", "opt": false}, {"en": "Salt – ¼ tsp", "cz": "Sůl – ¼ lžičky", "opt": false}, {"en": "Black pepper – ⅛ tsp", "cz": "Černý pepř – špetka", "opt": false}, {"en": "Salted butter, for spreading", "cz": "Máslo solené, na mazání", "opt": false}]}, {"url": "https://www.justonecookbook.com/tamagoyaki-japanese-rolled-omelette/", "name_en": "Dashimaki Tamago (Japanese Dashi Rolled Omelette)", "name_cz": "Dashimaki Tamago (japonská rolovaná omeleta s dashi)", "time": "10 min", "desc_en": "A silky rolled omelette made with a high ratio of dashi stock for a tender, custardy texture.", "desc_cz": "Hedvábná rolovaná omeleta s vysokým podílem vývaru dashi pro jemnou, krémovou texturu.", "ingredients": [{"en": "Large eggs – 3", "cz": "Vejce velká – 3 ks", "opt": false}, {"en": "Dashi (Japanese soup stock) – 3 Tbsp", "cz": "Vývar dashi – 3 lžíce", "opt": false}, {"en": "Soy sauce – 1 tsp", "cz": "Sójová omáčka – 1 lžička", "opt": false}, {"en": "Neutral oil – 2 Tbsp, for cooking", "cz": "Neutrální olej – 2 lžíce, na smažení", "opt": false}, {"en": "Mirin – 1 tsp", "cz": "Mirin – 1 lžička", "opt": false}, {"en": "Sugar – 2 tsp", "cz": "Cukr – 2 lžičky", "opt": false}, {"en": "Salt – 2 pinches", "cz": "Sůl – 2 špetky", "opt": false}]}, {"url": "https://www.justonecookbook.com/onigiri-rice-balls/", "name_en": "Onigiri (Japanese Rice Balls)", "name_cz": "Onigiri (japonské rýžové koule)", "time": "1 hr", "desc_en": "Classic hand-shaped rice balls wrapped in nori, filled with salmon, tuna mayo, mentaiko, or pickled plum.", "desc_cz": "Klasické ručně tvarované rýžové koule zabalené v nori, plněné lososem, tuňákovou majonézou, mentaiko nebo nakládanou švestkou.", "ingredients": [{"en": "Uncooked Japanese short-grain rice – 2¼ cups", "cz": "Syrová japonská rýže – 2¼ hrnku", "opt": false}, {"en": "Water – 2½ cups (600 ml)", "cz": "Voda – 600 ml", "opt": false}, {"en": "Nori seaweed – 3 sheets", "cz": "Řasy nori – 3 listy", "opt": false}, {"en": "Salt, for shaping", "cz": "Sůl, na tvarování", "opt": false}, {"en": "Salmon fillet – 1–2, cooked and flaked, for filling", "cz": "Filet lososa – 1–2 ks, uvařený a rozdrobený, na náplň", "opt": true}, {"en": "Katsuobushi (dried bonito flakes) – 1 packet, for filling", "cz": "Katsuobushi (sušené vločky bonita) – 1 sáček, na náplň", "opt": true}, {"en": "Canned tuna – 1 (5 oz) can, for filling", "cz": "Tuňák v konzervě – 1 ks (140 g), na náplň", "opt": true}, {"en": "Soy sauce – 1 Tbsp, for tuna filling", "cz": "Sójová omáčka – 1 lžíce, na tuňákovou náplň", "opt": true}, {"en": "Japanese Kewpie mayonnaise – 2 Tbsp, for tuna filling", "cz": "Japonská majonéza Kewpie – 2 lžíce, na tuňákovou náplň", "opt": true}, {"en": "Spicy salted cod roe (mentaiko) – 2 sacs, for filling", "cz": "Pikantní solené tresčí jikry (mentaiko) – 2 kusy, na náplň", "opt": true}, {"en": "Umeboshi (Japanese pickled plum) – 2, for filling", "cz": "Umeboshi (japonská nakládaná švestka) – 2 ks, na náplň", "opt": true}, {"en": "Shio kombu, furikake, for filling or garnish", "cz": "Shio kombu, furikake, na náplň nebo ozdobu", "opt": true}]}, {"url": "https://www.justonecookbook.com/nikujaga/", "name_en": "Nikujaga (Japanese Meat and Potato Stew)", "name_cz": "Nikujaga (japonský guláš z masa a brambor)", "time": "30 min", "desc_en": "A classic home-style stew of thinly sliced beef, potatoes, onion, and carrot simmered in a savory-sweet dashi broth.", "desc_cz": "Klasický domácí guláš z tence nakrájeného hovězího masa, brambor, cibule a mrkve dušený ve sladko-slaném vývaru dashi.", "ingredients": [{"en": "Thinly sliced beef (ribeye or similar) – ½ lb (225 g)", "cz": "Tence nakrájené hovězí maso (roštěná) – 225 g", "opt": false}, {"en": "Onion – 1 (8.8 oz/250 g)", "cz": "Cibule – 1 ks (250 g)", "opt": false}, {"en": "Carrot – 1 (4.5 oz/127 g)", "cz": "Mrkev – 1 ks (127 g)", "opt": false}, {"en": "Yukon gold potatoes – 3 (1.2 lb/546 g)", "cz": "Brambory – 3 ks (546 g)", "opt": false}, {"en": "Snow peas – 8 pieces (or green beans/peas)", "cz": "Hrachové lusky – 8 ks (nebo zelené fazolky/hrášek)", "opt": true}, {"en": "Shirataki noodles – 1 package (7 oz/200 g)", "cz": "Nudle shirataki – 1 balení (200 g)", "opt": true}, {"en": "Dashi (Japanese soup stock) – 2 cups", "cz": "Vývar dashi – 480 ml", "opt": false}, {"en": "Soy sauce – 4 Tbsp", "cz": "Sójová omáčka – 4 lžíce", "opt": false}, {"en": "Neutral oil – 1 Tbsp", "cz": "Neutrální olej – 1 lžíce", "opt": false}, {"en": "Mirin – 4 Tbsp", "cz": "Mirin – 4 lžíce", "opt": false}, {"en": "Sake – 2 Tbsp", "cz": "Saké – 2 lžíce", "opt": false}, {"en": "Sugar – 1 Tbsp", "cz": "Cukr – 1 lžíce", "opt": false}]}, {"url": "https://www.justonecookbook.com/tori-soboro-donburi/", "name_en": "Soboro Don (Ground Chicken Bowl)", "name_cz": "Soboro Don (miska s mletým kuřecím masem)", "time": "30 min", "desc_en": "Sweet-savory crumbled ground chicken and fluffy scrambled eggs served side by side over rice.", "desc_cz": "Sladko-slané drobenkovité mleté kuřecí maso a nadýchaná míchaná vejce podávané vedle sebe na rýži.", "ingredients": [{"en": "Ground chicken – ½ lb (225 g)", "cz": "Mleté kuřecí maso – 225 g", "opt": false}, {"en": "Ginger, grated – 1 tsp (from 1 inch/2.5 cm)", "cz": "Zázvor, nastrouhaný – 1 lžička", "opt": false}, {"en": "Green peas, cooked – 2 Tbsp", "cz": "Hrášek, vařený – 2 lžíce", "opt": true}, {"en": "Cooked Japanese short-grain rice – 2 servings", "cz": "Vařená japonská rýže – 2 porce", "opt": false}, {"en": "Large eggs – 3", "cz": "Vejce velká – 3 ks", "opt": false}, {"en": "Soy sauce – 2½ Tbsp", "cz": "Sójová omáčka – 2½ lžíce", "opt": false}, {"en": "Sake – 1 Tbsp", "cz": "Saké – 1 lžíce", "opt": false}, {"en": "Mirin – 1 Tbsp", "cz": "Mirin – 1 lžíce", "opt": false}, {"en": "Sugar – 1–1½ Tbsp for chicken, plus 1 Tbsp for eggs", "cz": "Cukr – 1–1½ lžíce na maso, plus 1 lžíce na vejce", "opt": false}, {"en": "Salt – ¼ tsp, for eggs", "cz": "Sůl – ¼ lžičky, na vejce", "opt": false}, {"en": "Pickled red ginger, for garnish", "cz": "Nakládaný červený zázvor, na ozdobu", "opt": true}]}, {"url": "https://www.justonecookbook.com/simmered-kabocha-squash/", "name_en": "Japanese Simmered Kabocha", "name_cz": "Japonská dušená kabocha (japonská dýně)", "time": "45 min", "desc_en": "Tender kabocha squash gently simmered in a savory-sweet dashi broth until it holds its shape but melts in your mouth.", "desc_cz": "Křehká dýně kabocha jemně dušená ve sladko-slaném vývaru dashi, dokud si nedrží tvar, ale rozplývá se v ústech.", "ingredients": [{"en": "Katsuobushi (dried bonito flakes) – ½ cup", "cz": "Katsuobushi (sušené vločky bonita) – ½ hrnku", "opt": true}, {"en": "Kabocha squash – 1 lb (450 g), about ½ small kabocha", "cz": "Dýně kabocha – 450 g, asi ½ malé dýně", "opt": false}, {"en": "Soy sauce – 2 tsp", "cz": "Sójová omáčka – 2 lžičky", "opt": false}, {"en": "Sake – 2 Tbsp", "cz": "Saké – 2 lžíce", "opt": false}, {"en": "Water – 1¾ cups", "cz": "Voda – 420 ml", "opt": false}, {"en": "Sugar – 1 Tbsp", "cz": "Cukr – 1 lžíce", "opt": false}, {"en": "Salt – ⅛ tsp", "cz": "Sůl – špetka", "opt": false}, {"en": "Ginger, julienned, for garnish", "cz": "Zázvor, na tenké nudličky, na ozdobu", "opt": true}]}, {"url": "https://www.justonecookbook.com/kinpira-gobo-braised-burdock-root/", "name_en": "Kinpira Gobo (Braised Burdock Root)", "name_cz": "Kinpira Gobo (dušený lopuch)", "time": "30 min", "desc_en": "Julienned burdock root and carrot stir-fried and braised in a sweet-savory soy glaze with a hint of sesame.", "desc_cz": "Nakrájený lopuch a mrkev na tenké nudličky, osmažené a dušené ve sladko-slané sójové glazuře se špetkou sezamu.", "ingredients": [{"en": "Gobo (burdock root) – 1 (9.5 oz/270 g)", "cz": "Gobo (lopuch) – 1 ks (270 g)", "opt": false}, {"en": "Carrot – ⅓ (2.5 oz/70 g)", "cz": "Mrkev – ⅓ ks (70 g)", "opt": false}, {"en": "Dried red chili pepper, for heat", "cz": "Sušená červená chilli paprička, na dochucení", "opt": true}, {"en": "Soy sauce – 1½ Tbsp", "cz": "Sójová omáčka – 1½ lžíce", "opt": false}, {"en": "Toasted sesame oil – 1½ Tbsp", "cz": "Pražený sezamový olej – 1½ lžíce", "opt": false}, {"en": "Toasted white sesame seeds – 2 tsp", "cz": "Pražený bílý sezam – 2 lžičky", "opt": false}, {"en": "Sake – 1 Tbsp", "cz": "Saké – 1 lžíce", "opt": false}, {"en": "Mirin – 1 Tbsp", "cz": "Mirin – 1 lžíce", "opt": false}, {"en": "Sugar – 1 Tbsp", "cz": "Cukr – 1 lžíce", "opt": false}]}, {"url": "https://www.justonecookbook.com/miso-meat-sauce-niku-miso/", "name_en": "All-Purpose Miso Meat Sauce (Niku Miso)", "name_cz": "Univerzální miso masová omáčka (Niku Miso)", "time": "30 min", "desc_en": "Ground pork braised with ginger and green onion in a sweet-savory miso sauce, great over rice, noodles, or in lettuce wraps.", "desc_cz": "Mleté vepřové maso dušené se zázvorem a jarní cibulkou ve sladko-slané miso omáčce, skvělé na rýži, nudle nebo do salátových závitků.", "ingredients": [{"en": "Ground pork – ¾ lb (340 g)", "cz": "Mleté vepřové maso – 340 g", "opt": false}, {"en": "Ginger – 1 knob (1 inch/2.5 cm), grated", "cz": "Zázvor – 1 kus (asi 2,5 cm), nastrouhaný", "opt": false}, {"en": "Tokyo negi (long green onion) – ½, or 2 scallions", "cz": "Jarní cibulka (silnější druh) – ½ ks, nebo 2 běžné cibulky", "opt": false}, {"en": "Potato starch or cornstarch – 2 tsp", "cz": "Bramborový nebo kukuřičný škrob – 2 lžičky", "opt": false}, {"en": "Miso – 4 Tbsp", "cz": "Miso pasta – 4 lžíce", "opt": false}, {"en": "Soy sauce – 1 Tbsp", "cz": "Sójová omáčka – 1 lžíce", "opt": false}, {"en": "Toasted sesame oil – 1 Tbsp", "cz": "Pražený sezamový olej – 1 lžíce", "opt": false}, {"en": "Mirin – 3 Tbsp", "cz": "Mirin – 3 lžíce", "opt": false}, {"en": "Sake – 3 Tbsp", "cz": "Saké – 3 lžíce", "opt": false}, {"en": "Sugar – 2 Tbsp", "cz": "Cukr – 2 lžíce", "opt": false}, {"en": "Water – 2 Tbsp", "cz": "Voda – 2 lžíce", "opt": false}]}]};
 
@@ -425,7 +657,14 @@ const TR = {
     hideIngredients: "Hide ingredients",
     resultCount: (n) => n === 1 ? "1 recipe" : n + " recipes",
     noResults: "No recipes match your search. Try a different word.",
-    footer: "Recipes curated from justonecookbook.com — tap a card to see ingredients, then open the original for full instructions."
+    footer: "Recipes curated from justonecookbook.com — tap a card to see ingredients, then open the original for full instructions.",
+    addToList: "Add to list",
+    addedToList: "Added",
+    fabLabel: "Shopping List",
+    panelTitle: "Shopping List",
+    clearAll: "Clear all",
+    panelEmpty: "Your list is empty. Tap \"Add to list\" on any recipe to build a shopping list for it.",
+    forRecipe: "for"
   },
   cz: {
     topbarTitle: "Japonské recepty",
@@ -443,14 +682,23 @@ const TR = {
     hideIngredients: "Skrýt suroviny",
     resultCount: (n) => n === 1 ? "1 recept" : (n >= 2 && n <= 4 ? n + " recepty" : n + " receptů"),
     noResults: "Žádné recepty neodpovídají hledání. Zkuste jiné slovo.",
-    footer: "Recepty vybrané z justonecookbook.com — klepnutím na kartu zobrazíte suroviny, pro celý postup otevřete originál."
+    footer: "Recepty vybrané z justonecookbook.com — klepnutím na kartu zobrazíte suroviny, pro celý postup otevřete originál.",
+    addToList: "Přidat na seznam",
+    addedToList: "Přidáno",
+    fabLabel: "Nákupní seznam",
+    panelTitle: "Nákupní seznam",
+    clearAll: "Vymazat vše",
+    panelEmpty: "Seznam je prázdný. Klepněte na „Přidat na seznam“ u libovolného receptu.",
+    forRecipe: "pro"
   }
 };
 
 let state = {
   lang: 'en',
   category: 'quick',
-  openCards: new Set()
+  openCards: new Set(),
+  selected: new Set(),
+  panelOpen: false
 };
 
 function setLang(lang) {
@@ -482,6 +730,9 @@ function applyStaticText() {
   document.getElementById('t-tab-bento-count').textContent = RECIPE_DATA.bento.length + ' ' + t.recipesWord;
   document.getElementById('search-input').placeholder = t.searchPlaceholder;
   document.getElementById('t-footer').textContent = t.footer;
+  document.getElementById('t-fab-label').textContent = t.fabLabel;
+  document.getElementById('t-panel-title').textContent = t.panelTitle;
+  if (state.panelOpen) renderPanel();
 }
 
 function escapeHtml(str) {
@@ -510,6 +761,138 @@ function toggleCard(idx) {
     state.openCards.add(idx);
   }
   renderGrid();
+}
+
+function recipeKey(category, idx) {
+  return category + '_' + idx;
+}
+
+function toggleShoppingItem(category, idx) {
+  const key = recipeKey(category, idx);
+  if (state.selected.has(key)) {
+    state.selected.delete(key);
+  } else {
+    state.selected.add(key);
+  }
+  updateFab();
+  renderGrid();
+  if (state.panelOpen) renderPanel();
+}
+
+function updateFab() {
+  const fab = document.getElementById('fab-cart');
+  const badge = document.getElementById('fab-badge');
+  const count = state.selected.size;
+  badge.textContent = count;
+  fab.classList.toggle('hidden', count === 0 && !state.panelOpen);
+}
+
+function openPanel() {
+  state.panelOpen = true;
+  document.getElementById('panel').classList.add('open');
+  document.getElementById('panel-overlay').classList.add('open');
+  renderPanel();
+}
+
+function closePanel() {
+  state.panelOpen = false;
+  document.getElementById('panel').classList.remove('open');
+  document.getElementById('panel-overlay').classList.remove('open');
+  updateFab();
+}
+
+function clearAllSelected() {
+  state.selected.clear();
+  updateFab();
+  renderGrid();
+  renderPanel();
+}
+
+function removeSelected(key) {
+  state.selected.delete(key);
+  updateFab();
+  renderGrid();
+  renderPanel();
+}
+
+function getSelectedRecipes() {
+  return Array.from(state.selected).map(key => {
+    const underscoreIdx = key.lastIndexOf('_');
+    const category = key.substring(0, underscoreIdx);
+    const idx = parseInt(key.substring(underscoreIdx + 1), 10);
+    const recipe = RECIPE_DATA[category][idx];
+    return { key, category, idx, recipe };
+  }).filter(item => item.recipe);
+}
+
+function renderPanel() {
+  const t = TR[state.lang];
+  const body = document.getElementById('panel-body');
+  const items = getSelectedRecipes();
+
+  if (items.length === 0) {
+    body.innerHTML = '<div class="panel-empty">' + t.panelEmpty + '</div>';
+    return;
+  }
+
+  // Chips row + clear-all
+  const chipsHtml = items.map(({ key, recipe }) => {
+    const name = state.lang === 'en' ? recipe.name_en : recipe.name_cz;
+    return '<span class="chip">' + escapeHtml(name) +
+      '<button class="chip-remove" onclick="removeSelected(\'' + key + '\')" aria-label="remove">✕</button></span>';
+  }).join('');
+
+  // Group ingredients by base name (text before the en-dash separator)
+  const groups = new Map(); // baseName(lower) -> { label, lines: [{detail, recipeName, opt}] }
+
+  items.forEach(({ recipe }) => {
+    const recipeName = state.lang === 'en' ? recipe.name_en : recipe.name_cz;
+    recipe.ingredients.forEach(ing => {
+      const text = state.lang === 'en' ? ing.en : ing.cz;
+      const dashIdx = text.indexOf(' – ');
+      let base, detail;
+      if (dashIdx !== -1) {
+        base = text.substring(0, dashIdx).trim();
+        detail = text.substring(dashIdx + 3).trim();
+      } else {
+        base = text.trim();
+        detail = '';
+      }
+      const key = base.toLowerCase();
+      if (!groups.has(key)) {
+        groups.set(key, { label: base, lines: [] });
+      }
+      groups.get(key).lines.push({ detail, recipeName, opt: ing.opt });
+    });
+  });
+
+  // Merge identical detail+opt within a group, listing which recipes need it
+  const groupsHtml = Array.from(groups.values()).map(group => {
+    const merged = new Map(); // detail+opt -> [recipeNames]
+    group.lines.forEach(line => {
+      const mkey = line.detail + '||' + line.opt;
+      if (!merged.has(mkey)) merged.set(mkey, { detail: line.detail, opt: line.opt, recipes: [] });
+      merged.get(mkey).recipes.push(line.recipeName);
+    });
+
+    const linesHtml = Array.from(merged.values()).map(m => {
+      const amtText = m.detail ? m.detail : '';
+      const optBadge = m.opt ? '<span class="opt-badge">' + t.optional + '</span>' : '';
+      const recipesText = m.recipes.length > 1
+        ? t.forRecipe + ' ' + m.recipes.length + '× (' + m.recipes.join(', ') + ')'
+        : t.forRecipe + ' ' + m.recipes[0];
+      return '<div class="shop-line">' +
+        '<span class="amt">' + (amtText ? escapeHtml(amtText) : '•') + '</span>' + optBadge +
+        '</div><div class="shop-line for-recipe" style="margin-top:-4px;">' + escapeHtml(recipesText) + '</div>';
+    }).join('');
+
+    return '<div class="shop-group"><div class="shop-group-name">' + escapeHtml(group.label) + '</div>' + linesHtml + '</div>';
+  }).join('');
+
+  body.innerHTML =
+    '<div class="selected-chips">' + chipsHtml + '</div>' +
+    '<div class="panel-toolbar"><button class="clear-all-btn" onclick="clearAllSelected()">' + t.clearAll + '</button></div>' +
+    groupsHtml;
 }
 
 function renderGrid() {
@@ -545,13 +928,19 @@ function renderGrid() {
       return '<li class="ing-item' + optClass + '"><span class="ing-bullet">•</span><span class="ing-text">' + escapeHtml(text) + optBadge + '</span></li>';
     }).join('');
 
+    const key = recipeKey(state.category, i);
+    const isSelected = state.selected.has(key);
+
     return (
       '<div class="card' + (isOpen ? ' open' : '') + '">' +
         '<div class="card-head" onclick="toggleCard(' + i + ')">' +
           '<div class="card-name">' + escapeHtml(name) + '</div>' +
           (r.time ? '<div class="card-time">⏱ ' + escapeHtml(r.time) + '</div>' : '') +
           '<p class="card-desc">' + escapeHtml(desc) + '</p>' +
-          '<div class="card-toggle-row">' +
+          '<div class="card-actions">' +
+            '<button class="add-list-btn' + (isSelected ? ' selected' : '') + '" onclick="event.stopPropagation(); toggleShoppingItem(\'' + state.category + '\', ' + i + ')">' +
+              (isSelected ? '✓ ' + t.addedToList : '+ ' + t.addToList) +
+            '</button>' +
             '<span class="expand-label">' + (isOpen ? t.hideIngredients : t.showIngredients) + ' <span class="chevron">▾</span></span>' +
           '</div>' +
         '</div>' +
@@ -569,6 +958,7 @@ function renderGrid() {
 
 applyStaticText();
 renderGrid();
+updateFab();
 </script>
 </body>
 </html>
