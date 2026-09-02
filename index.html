@@ -581,6 +581,186 @@
     font-size: 14.5px;
     line-height: 1.6;
   }
+
+  /* ---------- Page nav ---------- */
+  .page-nav {
+    display: flex;
+    gap: 8px;
+    max-width: 760px;
+    margin: 14px auto 0;
+    padding: 0 20px;
+  }
+
+  .page-nav-btn {
+    flex: 1;
+    border: 1px solid var(--border);
+    background: var(--paper);
+    color: var(--ink-soft);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 11px 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    font-family: Georgia, "Noto Serif", serif;
+  }
+
+  .page-nav-btn.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  /* ---------- Planner page ---------- */
+  .planner-wrap {
+    max-width: 900px;
+    margin: 26px auto 60px;
+    padding: 0 20px;
+  }
+
+  .planner-h2 {
+    font-size: 19px;
+    margin: 0 0 4px;
+    color: var(--ink);
+  }
+
+  .planner-sub {
+    color: var(--muted);
+    font-size: 13.5px;
+    margin: 0 0 14px;
+  }
+
+  .pool-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-bottom: 8px;
+    min-height: 44px;
+  }
+
+  .pool-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--paper);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 9px 13px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: grab;
+    user-select: none;
+    transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  }
+
+  .pool-chip:active { cursor: grabbing; }
+
+  .pool-chip.picked {
+    border-color: var(--accent);
+    background: #fbe9e2;
+    transform: translateY(-2px);
+  }
+
+  .pool-chip.dragging { opacity: 0.4; }
+
+  .planner-empty {
+    color: var(--muted);
+    font-size: 14.5px;
+    padding: 16px 0 8px;
+    line-height: 1.6;
+  }
+
+  .planner-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin: 6px 0 18px;
+  }
+
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  .day-block {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: var(--shadow);
+  }
+
+  .day-title {
+    font-family: Georgia, "Noto Serif", serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .slot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 42px;
+    border: 1.5px dashed var(--border);
+    border-radius: 9px;
+    padding: 8px 11px;
+    margin-bottom: 8px;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .slot:last-child { margin-bottom: 0; }
+
+  .slot.filled {
+    border-style: solid;
+    border-color: var(--accent2);
+    background: #eef2ea;
+  }
+
+  .slot.drag-over {
+    border-color: var(--accent);
+    background: #fbe9e2;
+  }
+
+  .slot-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    flex-shrink: 0;
+    width: 62px;
+  }
+
+  .slot-content {
+    flex: 1;
+    color: var(--ink);
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .slot-placeholder {
+    color: var(--muted);
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .slot-remove {
+    background: none;
+    border: none;
+    color: var(--accent-dark);
+    font-size: 15px;
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0 2px;
+  }
 </style>
 </head>
 <body>
@@ -594,6 +774,16 @@
   <div class="topbar-spacer"></div>
 </div>
 
+<div class="page-nav">
+  <button class="page-nav-btn active" id="pagenav-recipes" onclick="setPage('recipes')">
+    📖 <span id="t-page-recipes">Recipes</span>
+  </button>
+  <button class="page-nav-btn" id="pagenav-planner" onclick="setPage('planner')">
+    🗓️ <span id="t-page-planner">Meal Planner</span>
+  </button>
+</div>
+
+<div id="page-recipes">
 <div class="hero">
   <h1 id="t-hero-title">Quick &amp; Easy Japanese Recipes</h1>
   <p id="t-hero-sub">A hand-picked collection with ingredients ready to check at a glance — no need to open every recipe one by one.</p>
@@ -623,6 +813,20 @@
 </div>
 
 <footer id="t-footer">Recipes curated from justonecookbook.com — tap a card to see ingredients, then open the original for full instructions.</footer>
+</div>
+
+<div id="page-planner" style="display:none;">
+  <div class="planner-wrap">
+    <h2 class="planner-h2" id="t-pool-title">Your selected meals — drag or tap to place them</h2>
+    <div class="pool-list" id="pool-list"></div>
+
+    <div class="planner-toolbar">
+      <button class="clear-all-btn" id="t-clear-plan" onclick="clearPlan()">Clear week</button>
+    </div>
+
+    <div class="week-grid" id="week-grid"></div>
+  </div>
+</div>
 
 <button class="fab-cart hidden" id="fab-cart" onclick="openPanel()">
   🛒 <span id="t-fab-label">Shopping List</span> <span class="fab-badge" id="fab-badge">0</span>
@@ -664,7 +868,15 @@ const TR = {
     panelTitle: "Shopping List",
     clearAll: "Clear all",
     panelEmpty: "Your list is empty. Tap \"Add to list\" on any recipe to build a shopping list for it.",
-    forRecipe: "for"
+    forRecipe: "for",
+    pageRecipes: "Recipes",
+    pagePlanner: "Meal Planner",
+    poolTitle: "Your selected meals — drag or tap, then tap a slot to place them",
+    poolEmpty: "No meals selected yet. Go to Recipes and tap \"Add to list\" on the ones you want to plan.",
+    clearPlan: "Clear week",
+    slotPlaceholder: "Tap to place",
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    meals: ["Breakfast", "Lunch", "Dinner"]
   },
   cz: {
     topbarTitle: "Japonské recepty",
@@ -689,17 +901,53 @@ const TR = {
     panelTitle: "Nákupní seznam",
     clearAll: "Vymazat vše",
     panelEmpty: "Seznam je prázdný. Klepněte na „Přidat na seznam“ u libovolného receptu.",
-    forRecipe: "pro"
+    forRecipe: "pro",
+    pageRecipes: "Recepty",
+    pagePlanner: "Plánovač jídel",
+    poolTitle: "Vaše vybrané recepty — přetáhněte je nebo klepněte a poté klepněte na políčko",
+    poolEmpty: "Zatím nejsou vybrané žádné recepty. Přejděte na Recepty a klepněte na „Přidat na seznam“ u těch, které chcete naplánovat.",
+    clearPlan: "Vymazat týden",
+    slotPlaceholder: "Klepněte pro umístění",
+    days: ["Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek", "Sobota", "Neděle"],
+    meals: ["Snídaně", "Oběd", "Večeře"]
   }
 };
+
+const DAY_KEYS = ['mon','tue','wed','thu','fri','sat','sun'];
+const MEAL_KEYS = ['breakfast','lunch','dinner'];
+const STORAGE_KEY = 'joc_recipe_planner_v1';
 
 let state = {
   lang: 'en',
   category: 'quick',
+  page: 'recipes',
   openCards: new Set(),
   selected: new Set(),
-  panelOpen: false
+  panelOpen: false,
+  plan: {},
+  pickedMeal: null
 };
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      lang: state.lang,
+      selected: Array.from(state.selected),
+      plan: state.plan
+    }));
+  } catch (e) { /* storage unavailable — continue with in-memory state only */ }
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const saved = JSON.parse(raw);
+    if (saved.lang) state.lang = saved.lang;
+    if (Array.isArray(saved.selected)) state.selected = new Set(saved.selected);
+    if (saved.plan && typeof saved.plan === 'object') state.plan = saved.plan;
+  } catch (e) { /* storage unavailable or corrupt — start fresh */ }
+}
 
 function setLang(lang) {
   state.lang = lang;
@@ -708,6 +956,8 @@ function setLang(lang) {
   document.documentElement.lang = lang === 'cz' ? 'cs' : 'en';
   applyStaticText();
   renderGrid();
+  if (state.page === 'planner') renderPlanner();
+  saveState();
 }
 
 function setCategory(cat) {
@@ -717,6 +967,16 @@ function setCategory(cat) {
   document.getElementById('tab-bento').classList.toggle('active', cat === 'bento');
   applyStaticText();
   renderGrid();
+}
+
+function setPage(page) {
+  state.page = page;
+  state.pickedMeal = null;
+  document.getElementById('pagenav-recipes').classList.toggle('active', page === 'recipes');
+  document.getElementById('pagenav-planner').classList.toggle('active', page === 'planner');
+  document.getElementById('page-recipes').style.display = page === 'recipes' ? '' : 'none';
+  document.getElementById('page-planner').style.display = page === 'planner' ? '' : 'none';
+  if (page === 'planner') renderPlanner();
 }
 
 function applyStaticText() {
@@ -732,6 +992,10 @@ function applyStaticText() {
   document.getElementById('t-footer').textContent = t.footer;
   document.getElementById('t-fab-label').textContent = t.fabLabel;
   document.getElementById('t-panel-title').textContent = t.panelTitle;
+  document.getElementById('t-page-recipes').textContent = t.pageRecipes;
+  document.getElementById('t-page-planner').textContent = t.pagePlanner;
+  document.getElementById('t-pool-title').textContent = t.poolTitle;
+  document.getElementById('t-clear-plan').textContent = t.clearPlan;
   if (state.panelOpen) renderPanel();
 }
 
@@ -771,12 +1035,18 @@ function toggleShoppingItem(category, idx) {
   const key = recipeKey(category, idx);
   if (state.selected.has(key)) {
     state.selected.delete(key);
+    // remove this meal from any planner slots too, since it's no longer selected
+    Object.keys(state.plan).forEach(slotKey => {
+      if (state.plan[slotKey] === key) delete state.plan[slotKey];
+    });
   } else {
     state.selected.add(key);
   }
   updateFab();
   renderGrid();
   if (state.panelOpen) renderPanel();
+  if (state.page === 'planner') renderPlanner();
+  saveState();
 }
 
 function updateFab() {
@@ -803,16 +1073,24 @@ function closePanel() {
 
 function clearAllSelected() {
   state.selected.clear();
+  state.plan = {};
   updateFab();
   renderGrid();
   renderPanel();
+  if (state.page === 'planner') renderPlanner();
+  saveState();
 }
 
 function removeSelected(key) {
   state.selected.delete(key);
+  Object.keys(state.plan).forEach(slotKey => {
+    if (state.plan[slotKey] === key) delete state.plan[slotKey];
+  });
   updateFab();
   renderGrid();
   renderPanel();
+  if (state.page === 'planner') renderPlanner();
+  saveState();
 }
 
 function getSelectedRecipes() {
@@ -823,6 +1101,130 @@ function getSelectedRecipes() {
     const recipe = RECIPE_DATA[category][idx];
     return { key, category, idx, recipe };
   }).filter(item => item.recipe);
+}
+
+function renderPlanner() {
+  renderPool();
+  renderWeekGrid();
+}
+
+function renderPool() {
+  const t = TR[state.lang];
+  const pool = document.getElementById('pool-list');
+  const items = getSelectedRecipes();
+
+  if (items.length === 0) {
+    pool.innerHTML = '<div class="planner-empty">' + t.poolEmpty + '</div>';
+    return;
+  }
+
+  pool.innerHTML = items.map(({ key, recipe }) => {
+    const name = state.lang === 'en' ? recipe.name_en : recipe.name_cz;
+    const picked = state.pickedMeal === key ? ' picked' : '';
+    return '<div class="pool-chip' + picked + '" draggable="true" ' +
+      'data-key="' + key + '" ' +
+      'ondragstart="handleDragStart(event, \'' + key + '\')" ' +
+      'ondragend="handleDragEnd(event)" ' +
+      'onclick="pickMeal(\'' + key + '\')">' + escapeHtml(name) + '</div>';
+  }).join('');
+}
+
+function pickMeal(key) {
+  state.pickedMeal = state.pickedMeal === key ? null : key;
+  renderPool();
+}
+
+function handleDragStart(ev, key) {
+  ev.dataTransfer.setData('text/plain', key);
+  ev.dataTransfer.effectAllowed = 'copy';
+  ev.target.classList.add('dragging');
+}
+
+function handleDragEnd(ev) {
+  ev.target.classList.remove('dragging');
+}
+
+function handleSlotDragOver(ev) {
+  ev.preventDefault();
+  ev.dataTransfer.dropEffect = 'copy';
+  ev.currentTarget.classList.add('drag-over');
+}
+
+function handleSlotDragLeave(ev) {
+  ev.currentTarget.classList.remove('drag-over');
+}
+
+function handleSlotDrop(ev, day, meal) {
+  ev.preventDefault();
+  ev.currentTarget.classList.remove('drag-over');
+  const key = ev.dataTransfer.getData('text/plain');
+  if (key) assignToSlot(day, meal, key);
+}
+
+function handleSlotClick(day, meal) {
+  const slotKey = day + '_' + meal;
+  if (state.pickedMeal) {
+    assignToSlot(day, meal, state.pickedMeal);
+    state.pickedMeal = null;
+    renderPool();
+  } else if (state.plan[slotKey]) {
+    removeFromSlot(day, meal);
+  }
+}
+
+function assignToSlot(day, meal, key) {
+  const slotKey = day + '_' + meal;
+  state.plan[slotKey] = key;
+  renderWeekGrid();
+  saveState();
+}
+
+function removeFromSlot(day, meal) {
+  const slotKey = day + '_' + meal;
+  delete state.plan[slotKey];
+  renderWeekGrid();
+  saveState();
+}
+
+function clearPlan() {
+  state.plan = {};
+  renderWeekGrid();
+  saveState();
+}
+
+function renderWeekGrid() {
+  const t = TR[state.lang];
+  const grid = document.getElementById('week-grid');
+
+  grid.innerHTML = DAY_KEYS.map((day, dayIdx) => {
+    const dayName = t.days[dayIdx];
+    const slotsHtml = MEAL_KEYS.map((meal, mealIdx) => {
+      const slotKey = day + '_' + meal;
+      const assignedKey = state.plan[slotKey];
+      let recipe = null;
+      if (assignedKey) {
+        const underscoreIdx = assignedKey.lastIndexOf('_');
+        const category = assignedKey.substring(0, underscoreIdx);
+        const idx = parseInt(assignedKey.substring(underscoreIdx + 1), 10);
+        recipe = RECIPE_DATA[category] && RECIPE_DATA[category][idx];
+      }
+      const filledClass = recipe ? ' filled' : '';
+      const content = recipe
+        ? '<span class="slot-content">' + escapeHtml(state.lang === 'en' ? recipe.name_en : recipe.name_cz) + '</span>' +
+          '<button class="slot-remove" onclick="event.stopPropagation(); removeFromSlot(\'' + day + '\', \'' + meal + '\')">✕</button>'
+        : '<span class="slot-content slot-placeholder">' + t.slotPlaceholder + '</span>';
+
+      return '<div class="slot' + filledClass + '" ' +
+        'ondragover="handleSlotDragOver(event)" ' +
+        'ondragleave="handleSlotDragLeave(event)" ' +
+        'ondrop="handleSlotDrop(event, \'' + day + '\', \'' + meal + '\')" ' +
+        'onclick="handleSlotClick(\'' + day + '\', \'' + meal + '\')">' +
+        '<span class="slot-label">' + t.meals[mealIdx] + '</span>' + content +
+        '</div>';
+    }).join('');
+
+    return '<div class="day-block"><div class="day-title">' + dayName + '</div>' + slotsHtml + '</div>';
+  }).join('');
 }
 
 function renderPanel() {
@@ -956,6 +1358,10 @@ function renderGrid() {
   }).join('');
 }
 
+loadState();
+document.getElementById('btn-en').classList.toggle('active', state.lang === 'en');
+document.getElementById('btn-cz').classList.toggle('active', state.lang === 'cz');
+document.documentElement.lang = state.lang === 'cz' ? 'cs' : 'en';
 applyStaticText();
 renderGrid();
 updateFab();
