@@ -761,6 +761,132 @@
     flex-shrink: 0;
     padding: 0 2px;
   }
+
+  /* ---------- Pantry / "What can I cook" page ---------- */
+  .pantry-wrap {
+    max-width: 900px;
+    margin: 26px auto 60px;
+    padding: 0 20px;
+  }
+
+  .pantry-wrap .search-input {
+    margin: 14px 0;
+  }
+
+  .pantry-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .pantry-count {
+    font-size: 13.5px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .pantry-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 30px;
+    max-height: 380px;
+    overflow-y: auto;
+    padding: 4px 2px;
+  }
+
+  .pantry-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--paper);
+    border: 1.5px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 13px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s;
+  }
+
+  .pantry-chip .check {
+    font-size: 12px;
+    width: 14px;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .pantry-chip.have {
+    background: var(--accent2);
+    border-color: var(--accent2);
+    color: #fff;
+  }
+
+  .pantry-section-title {
+    font-family: Georgia, "Noto Serif", serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink);
+    margin: 22px 0 12px;
+  }
+
+  .match-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .match-item {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 13px 16px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .match-item.almost {
+    border-left: 4px solid var(--optional-ink);
+  }
+
+  .match-item.full {
+    border-left: 4px solid var(--accent2);
+  }
+
+  .match-name {
+    font-weight: 700;
+    color: var(--ink);
+    font-family: Georgia, "Noto Serif", serif;
+    font-size: 15px;
+  }
+
+  .match-missing {
+    font-size: 12.5px;
+    color: var(--optional-ink);
+    margin-top: 3px;
+  }
+
+  .match-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .match-link {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent-dark);
+    text-decoration: none;
+    white-space: nowrap;
+  }
 </style>
 </head>
 <body>
@@ -780,6 +906,9 @@
   </button>
   <button class="page-nav-btn" id="pagenav-planner" onclick="setPage('planner')">
     🗓️ <span id="t-page-planner">Meal Planner</span>
+  </button>
+  <button class="page-nav-btn" id="pagenav-pantry" onclick="setPage('pantry')">
+    🥘 <span id="t-page-pantry">What Can I Cook?</span>
   </button>
 </div>
 
@@ -825,6 +954,24 @@
     </div>
 
     <div class="week-grid" id="week-grid"></div>
+  </div>
+</div>
+
+<div id="page-pantry" style="display:none;">
+  <div class="pantry-wrap">
+    <h2 class="planner-h2" id="t-pantry-title">What Can I Cook?</h2>
+    <p class="planner-sub" id="t-pantry-intro">Check off what you already have at home, and we'll show you which recipes you can make right now.</p>
+
+    <input type="text" class="search-input" id="pantry-search" placeholder="Search ingredients…" oninput="renderPantryIngredients()">
+
+    <div class="pantry-toolbar">
+      <span class="pantry-count" id="pantry-count"></span>
+      <button class="clear-all-btn" id="t-clear-pantry" onclick="clearPantry()">Clear my pantry</button>
+    </div>
+
+    <div class="pantry-chips" id="pantry-chips"></div>
+
+    <div class="pantry-results" id="pantry-results"></div>
   </div>
 </div>
 
@@ -876,7 +1023,18 @@ const TR = {
     clearPlan: "Clear week",
     slotPlaceholder: "Tap to place",
     days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-    meals: ["Breakfast", "Lunch", "Dinner"]
+    meals: ["Breakfast", "Lunch", "Dinner"],
+    pagePantry: "What Can I Cook?",
+    pantryTitle: "What Can I Cook?",
+    pantryIntro: "Check off what you already have at home, and we'll show you which recipes you can make right now.",
+    pantrySearchPlaceholder: "Search ingredients…",
+    clearPantry: "Clear my pantry",
+    pantryCount: (n) => n === 1 ? "1 ingredient selected" : n + " ingredients selected",
+    youCanMake: "You can make",
+    almostThere: "Almost there — just missing a few things",
+    missingLabel: "Missing:",
+    pantryNoSelection: "Check off a few ingredients above to see what you can make.",
+    pantryNoMatches: "No matches yet — keep checking off what you have."
   },
   cz: {
     topbarTitle: "Japonské recepty",
@@ -909,7 +1067,18 @@ const TR = {
     clearPlan: "Vymazat týden",
     slotPlaceholder: "Klepněte pro umístění",
     days: ["Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek", "Sobota", "Neděle"],
-    meals: ["Snídaně", "Oběd", "Večeře"]
+    meals: ["Snídaně", "Oběd", "Večeře"],
+    pagePantry: "Co uvařím?",
+    pantryTitle: "Co uvařím?",
+    pantryIntro: "Zaškrtněte, co už máte doma, a my vám ukážeme, které recepty můžete hned uvařit.",
+    pantrySearchPlaceholder: "Hledat suroviny…",
+    clearPantry: "Vymazat spíž",
+    pantryCount: (n) => n === 1 ? "1 vybraná surovina" : (n >= 2 && n <= 4 ? n + " vybrané suroviny" : n + " vybraných surovin"),
+    youCanMake: "Můžete uvařit",
+    almostThere: "Skoro tam — chybí jen pár věcí",
+    missingLabel: "Chybí:",
+    pantryNoSelection: "Zaškrtněte pár surovin výše a uvidíte, co můžete uvařit.",
+    pantryNoMatches: "Zatím žádná shoda — zkuste zaškrtnout víc surovin."
   }
 };
 
@@ -925,7 +1094,8 @@ let state = {
   selected: new Set(),
   panelOpen: false,
   plan: {},
-  pickedMeal: null
+  pickedMeal: null,
+  pantry: new Set()
 };
 
 function saveState() {
@@ -933,7 +1103,8 @@ function saveState() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
       lang: state.lang,
       selected: Array.from(state.selected),
-      plan: state.plan
+      plan: state.plan,
+      pantry: Array.from(state.pantry)
     }));
   } catch (e) { /* storage unavailable — continue with in-memory state only */ }
 }
@@ -946,6 +1117,7 @@ function loadState() {
     if (saved.lang) state.lang = saved.lang;
     if (Array.isArray(saved.selected)) state.selected = new Set(saved.selected);
     if (saved.plan && typeof saved.plan === 'object') state.plan = saved.plan;
+    if (Array.isArray(saved.pantry)) state.pantry = new Set(saved.pantry);
   } catch (e) { /* storage unavailable or corrupt — start fresh */ }
 }
 
@@ -957,6 +1129,7 @@ function setLang(lang) {
   applyStaticText();
   renderGrid();
   if (state.page === 'planner') renderPlanner();
+  if (state.page === 'pantry') renderPantryPage();
   saveState();
 }
 
@@ -974,9 +1147,12 @@ function setPage(page) {
   state.pickedMeal = null;
   document.getElementById('pagenav-recipes').classList.toggle('active', page === 'recipes');
   document.getElementById('pagenav-planner').classList.toggle('active', page === 'planner');
+  document.getElementById('pagenav-pantry').classList.toggle('active', page === 'pantry');
   document.getElementById('page-recipes').style.display = page === 'recipes' ? '' : 'none';
   document.getElementById('page-planner').style.display = page === 'planner' ? '' : 'none';
+  document.getElementById('page-pantry').style.display = page === 'pantry' ? '' : 'none';
   if (page === 'planner') renderPlanner();
+  if (page === 'pantry') renderPantryPage();
 }
 
 function applyStaticText() {
@@ -994,8 +1170,13 @@ function applyStaticText() {
   document.getElementById('t-panel-title').textContent = t.panelTitle;
   document.getElementById('t-page-recipes').textContent = t.pageRecipes;
   document.getElementById('t-page-planner').textContent = t.pagePlanner;
+  document.getElementById('t-page-pantry').textContent = t.pagePantry;
   document.getElementById('t-pool-title').textContent = t.poolTitle;
   document.getElementById('t-clear-plan').textContent = t.clearPlan;
+  document.getElementById('t-pantry-title').textContent = t.pantryTitle;
+  document.getElementById('t-pantry-intro').textContent = t.pantryIntro;
+  document.getElementById('t-clear-pantry').textContent = t.clearPantry;
+  document.getElementById('pantry-search').placeholder = t.pantrySearchPlaceholder;
   if (state.panelOpen) renderPanel();
 }
 
@@ -1046,6 +1227,7 @@ function toggleShoppingItem(category, idx) {
   renderGrid();
   if (state.panelOpen) renderPanel();
   if (state.page === 'planner') renderPlanner();
+  if (state.page === 'pantry') renderPantryResults();
   saveState();
 }
 
@@ -1225,6 +1407,146 @@ function renderWeekGrid() {
 
     return '<div class="day-block"><div class="day-title">' + dayName + '</div>' + slotsHtml + '</div>';
   }).join('');
+}
+
+// ---------- Pantry / "What can I cook" ----------
+let ingredientIndexCache = null;
+let recipeRequirementsCache = null;
+
+function ingredientBaseKey(enText) {
+  const dashIdx = enText.indexOf(' – ');
+  const base = dashIdx !== -1 ? enText.substring(0, dashIdx) : enText;
+  return base.trim().toLowerCase();
+}
+
+function buildIngredientIndex() {
+  if (ingredientIndexCache) return;
+  ingredientIndexCache = new Map(); // key -> { en: label, cz: label }
+  recipeRequirementsCache = []; // { category, idx, recipe, required: [{key, en, cz}], optionalKeys: Set }
+
+  ['quick', 'bento'].forEach(category => {
+    RECIPE_DATA[category].forEach((recipe, idx) => {
+      const required = [];
+      const seenKeys = new Set();
+      recipe.ingredients.forEach(ing => {
+        const key = ingredientBaseKey(ing.en);
+        const dashIdxEn = ing.en.indexOf(' – ');
+        const labelEn = dashIdxEn !== -1 ? ing.en.substring(0, dashIdxEn).trim() : ing.en.trim();
+        const dashIdxCz = ing.cz.indexOf(' – ');
+        const labelCz = dashIdxCz !== -1 ? ing.cz.substring(0, dashIdxCz).trim() : ing.cz.trim();
+
+        if (!ingredientIndexCache.has(key)) {
+          ingredientIndexCache.set(key, { en: labelEn, cz: labelCz });
+        }
+        if (!ing.opt && !seenKeys.has(key)) {
+          seenKeys.add(key);
+          required.push({ key, en: labelEn, cz: labelCz });
+        }
+      });
+      recipeRequirementsCache.push({ category, idx, recipe, required });
+    });
+  });
+}
+
+function renderPantryPage() {
+  buildIngredientIndex();
+  renderPantryIngredients();
+  renderPantryResults();
+}
+
+function renderPantryIngredients() {
+  const t = TR[state.lang];
+  const query = document.getElementById('pantry-search').value.trim().toLowerCase();
+  const chipsEl = document.getElementById('pantry-chips');
+  const countEl = document.getElementById('pantry-count');
+
+  countEl.textContent = t.pantryCount(state.pantry.size);
+
+  const entries = Array.from(ingredientIndexCache.entries())
+    .map(([key, labels]) => ({ key, label: state.lang === 'en' ? labels.en : labels.cz }))
+    .filter(e => !query || e.label.toLowerCase().includes(query))
+    .sort((a, b) => a.label.localeCompare(b.label, state.lang === 'cz' ? 'cs' : 'en'));
+
+  chipsEl.innerHTML = entries.map(e => {
+    const have = state.pantry.has(e.key);
+    return '<div class="pantry-chip' + (have ? ' have' : '') + '" onclick="togglePantryItem(\'' + e.key.replace(/'/g, "\\'") + '\')">' +
+      '<span class="check">' + (have ? '✓' : '') + '</span>' + escapeHtml(e.label) +
+      '</div>';
+  }).join('');
+}
+
+function togglePantryItem(key) {
+  if (state.pantry.has(key)) {
+    state.pantry.delete(key);
+  } else {
+    state.pantry.add(key);
+  }
+  renderPantryIngredients();
+  renderPantryResults();
+  saveState();
+}
+
+function clearPantry() {
+  state.pantry.clear();
+  renderPantryIngredients();
+  renderPantryResults();
+  saveState();
+}
+
+function renderPantryResults() {
+  const t = TR[state.lang];
+  const resultsEl = document.getElementById('pantry-results');
+
+  if (state.pantry.size === 0) {
+    resultsEl.innerHTML = '<div class="planner-empty">' + t.pantryNoSelection + '</div>';
+    return;
+  }
+
+  const fullMatches = [];
+  const almostMatches = [];
+
+  recipeRequirementsCache.forEach(entry => {
+    if (entry.required.length === 0) return;
+    const missing = entry.required.filter(r => !state.pantry.has(r.key));
+    if (missing.length === 0) {
+      fullMatches.push(entry);
+    } else if (missing.length <= 2) {
+      almostMatches.push({ ...entry, missing });
+    }
+  });
+
+  if (fullMatches.length === 0 && almostMatches.length === 0) {
+    resultsEl.innerHTML = '<div class="planner-empty">' + t.pantryNoMatches + '</div>';
+    return;
+  }
+
+  function renderMatchItem(entry, missing) {
+    const name = state.lang === 'en' ? entry.recipe.name_en : entry.recipe.name_cz;
+    const key = recipeKey(entry.category, entry.idx);
+    const isSelected = state.selected.has(key);
+    const missingHtml = missing && missing.length
+      ? '<div class="match-missing">' + t.missingLabel + ' ' + missing.map(m => escapeHtml(state.lang === 'en' ? m.en : m.cz)).join(', ') + '</div>'
+      : '';
+    return '<div class="match-item' + (missing && missing.length ? ' almost' : ' full') + '">' +
+      '<div><div class="match-name">' + escapeHtml(name) + '</div>' + missingHtml + '</div>' +
+      '<div class="match-actions">' +
+        '<button class="add-list-btn' + (isSelected ? ' selected' : '') + '" onclick="toggleShoppingItem(\'' + entry.category + '\', ' + entry.idx + ')">' +
+          (isSelected ? '✓ ' + t.addedToList : '+ ' + t.addToList) +
+        '</button>' +
+        '<a class="match-link" href="' + entry.recipe.url + '" target="_blank" rel="noopener">↗</a>' +
+      '</div></div>';
+  }
+
+  let html = '';
+  if (fullMatches.length > 0) {
+    html += '<div class="pantry-section-title">' + t.youCanMake + ' (' + fullMatches.length + ')</div>';
+    html += '<div class="match-list">' + fullMatches.map(e => renderMatchItem(e, null)).join('') + '</div>';
+  }
+  if (almostMatches.length > 0) {
+    html += '<div class="pantry-section-title">' + t.almostThere + ' (' + almostMatches.length + ')</div>';
+    html += '<div class="match-list">' + almostMatches.map(e => renderMatchItem(e, e.missing)).join('') + '</div>';
+  }
+  resultsEl.innerHTML = html;
 }
 
 function renderPanel() {
